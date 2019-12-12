@@ -1,5 +1,7 @@
 # MES
 
+![MES](docs/images/mes.png "MES")
+
 Progetto iniziato mercoledì 11 dicembre 2019.
 
 ## Componenti del gruppo
