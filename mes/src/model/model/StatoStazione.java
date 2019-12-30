@@ -1,15 +1,16 @@
+package model;
 
 import java.util.*;
 
 /**
  * 
  */
-public class StatoLinea {
+public class StatoStazione {
 
     /**
      * Default constructor
      */
-    public StatoLinea() {
+    public StatoStazione() {
     }
 
     /**
@@ -20,12 +21,12 @@ public class StatoLinea {
     /**
      * 
      */
-    private LineaDiProduzione linea;
+    private Stazione stazione;
 
     /**
      * 
      */
-    private StatiLinea statoLinea;
+    private SegnaleStazione statoSegnale;
 
 
 
