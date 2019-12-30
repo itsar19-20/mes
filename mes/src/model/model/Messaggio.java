@@ -1,20 +1,21 @@
+package model;
 
 import java.util.*;
 
 /**
  * 
  */
-public class Risposta {
+public class Messaggio {
 
     /**
      * Default constructor
      */
-    public Risposta() {
+    public Messaggio() {
     }
 
     /**
      * 
      */
-    
+    private String testo;
 
 }

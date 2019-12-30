@@ -1,31 +1,32 @@
+package model;
 
 import java.util.*;
 
 /**
  * 
  */
-public class StatoStazione {
+public class Stazione {
 
     /**
      * Default constructor
      */
-    public StatoStazione() {
+    public Stazione() {
     }
 
     /**
      * 
      */
-    private Date timestamp;
+    private LineaDiProduzione linea;
 
     /**
      * 
      */
-    private Stazione stazione;
+    private String nome;
 
     /**
      * 
      */
-    private SegnaleStazione statoSegnale;
+    private String codiceStazione;
 
 
 

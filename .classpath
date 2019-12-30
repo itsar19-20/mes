@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="model/|business/" kind="src" path="mes/src"/>
+	<classpathentry kind="src" path="mes/src/business"/>
+	<classpathentry kind="src" path="mes/src/model"/>
+	<classpathentry kind="output" path="mes/target/classes"/>
+</classpath>

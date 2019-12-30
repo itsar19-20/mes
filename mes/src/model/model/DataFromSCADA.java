@@ -1,3 +1,4 @@
+package model;
 
 import java.util.*;
 
@@ -15,7 +16,7 @@ public class DataFromSCADA {
     /**
      * 
      */
-    private String endpointServizioRESTSCADA;
+    private String endpointServizioREST;
 
     /**
      * @param codiceLinea 
