@@ -1,4 +1,4 @@
-package classiMes;
+package model;
 
 import java.util.Date;
 

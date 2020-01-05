@@ -1,4 +1,4 @@
-package lavoroMes;
+package model;
 
 import java.util.Date;
 
