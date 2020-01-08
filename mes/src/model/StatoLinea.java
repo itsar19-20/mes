@@ -1,9 +1,12 @@
 package model;
 
 import java.util.Date;
+import javax.persistence.*; 
 
+@Entity
 public class StatoLinea {
 
+	@Id
 	private Date timestamp;
 	private LineaDiProduzione linea;
 	private StatiLinea statoLinea;
