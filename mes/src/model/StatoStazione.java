@@ -1,9 +1,13 @@
 package model;
 
 import java.util.Date;
-
+import javax.persistence.*;
+ 
+@Entity
 public class StatoStazione {
 
+	
+	@Id	
 	private Date TimeStamp;
 	private Stazione stazione;
 	private SegnaleStazione statoSegnale;
