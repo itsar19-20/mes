@@ -1,4 +1,4 @@
-package classiMes;
+package model;
 
 public class Risposta {
 

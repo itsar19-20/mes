@@ -1,4 +1,4 @@
-package mes;
+package model;
 import javax.persistence.*;
 
 @Entity
