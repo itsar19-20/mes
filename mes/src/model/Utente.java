@@ -1,8 +1,11 @@
 package mes;
+import javax.persistence.*;
 
+@Entity
 public class Utente {
 	
 	private String ruolo;
+	@Id
 	private int id;
 	private String nome;
 	private String password;
