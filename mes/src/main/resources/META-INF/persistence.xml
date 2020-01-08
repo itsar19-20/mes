@@ -3,6 +3,10 @@
 	<persistence-unit name="Mes" transaction-type="RESOURCE_LOCAL">
 		<class>model.LineaDiProduzione</class>
 		<class>model.Stazione</class>
+		<class>model.Messaggio</class>
+		<class>model.StatoLinea</class>
+		<class>model.StatoStazione</class>
+		<class>model.Utente</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://mes.caoojblgegbu.eu-central-1.rds.amazonaws.com:3306/"/>
