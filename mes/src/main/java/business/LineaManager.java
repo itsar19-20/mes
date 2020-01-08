@@ -2,8 +2,11 @@ package business;
 
 import java.util.*;
 
+import javax.persistence.EntityManager;
+
 import model.LineaDiProduzione;
 import model.StatiLinea;
+import utils.JPAUtil;
 
 /**
  * 
@@ -20,7 +23,8 @@ public class LineaManager {
      * @param elenco
      */
     public void elencoLinee(Set<LineaDiProduzione> elenco) {
-        // TODO implement here
+    	EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
+    	//TODO: implementare la ricerca delle linee nel db
     }
 
     /**
@@ -28,7 +32,7 @@ public class LineaManager {
      * @return
      */
     public StatiLinea getStatoLinea(String codiceLinea) {
-        // TODO implement here
+        // TODO implementare la logica di gestione dello stato della linea
         return null;
     }
 
@@ -36,7 +40,7 @@ public class LineaManager {
      * @param codiceLinea
      */
     public void avvia(String codiceLinea) {
-        // TODO implement here
+        // TODO implementare la logica di avvio di una linea
     }
 
 }
