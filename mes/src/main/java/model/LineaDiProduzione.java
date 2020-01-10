@@ -20,6 +20,7 @@ public class LineaDiProduzione {
     private List<Stazione> stazioni;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private String codiceLinea;
 
 
