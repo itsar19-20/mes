@@ -28,19 +28,40 @@ public class LineaManager {
     }
 
     /**
+     * @param codiceLinea
+     */
+    public void avvia(String codiceLinea) {
+        // TODO implementare la logica di avvio di una linea
+    }
+    
+    /*
+     * @param codiceLinea
+     */
+    public void ferma(String codiceLinea) {
+    	// TODO implementare la logica 
+    }
+    
+    /*
+     * @param codiceLinea
+     */
+    public void inErrore(String codiceLinea) {
+    	// TODO implementare la logica di avvio di una linea
+    }
+    
+    /*
+     * @param codiceLinea
+     */
+    public void inPausa(String codiceLinea) {
+    	// TODO implementare la logica di avvio di una linea
+    }
+    
+    /**
      * @param codiceLinea 
      * @return
      */
     public StatiLinea getStatoLinea(String codiceLinea) {
         // TODO implementare la logica di gestione dello stato della linea
         return null;
-    }
-
-    /**
-     * @param codiceLinea
-     */
-    public void avvia(String codiceLinea) {
-        // TODO implementare la logica di avvio di una linea
     }
 
 }
