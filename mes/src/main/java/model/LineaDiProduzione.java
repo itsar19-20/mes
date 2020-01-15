@@ -24,14 +24,11 @@ public class LineaDiProduzione {
     private String codiceLinea;
 
 
-
     /**
      *	methods
      */
     public void aggiorna() {
-
         // lo aggiorna direttamente dal database??
-
     }
 
 
@@ -63,6 +60,11 @@ public class LineaDiProduzione {
 
 	public void setCodiceLinea(String codiceLinea) {
 		this.codiceLinea = codiceLinea;
+	}
+
+
+	public StatiLinea getUltimoStato() {
+		return null;
 	}
 
 }
