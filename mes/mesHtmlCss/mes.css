@@ -1,0 +1,47 @@
+
+
+div.form-group {
+    margin-left:744px;
+    margin-right:auto;
+    margin-bottom:50px;
+    margin-top:400px;
+    width:400px;
+}
+.form-group {
+    min-width: 0;
+    width: auto;
+    height:auto;
+    border-radius: 12px;
+}
+div.pippo{
+    margin-left:774px;
+    margin-right:auto;
+    width:350px;
+    margin-bottom:50px;
+    margin-top:50px;
+
+
+}
+.form-control{
+    min-width: 0;
+    width: auto;
+    height:auto;
+    border-radius: 12px;
+}
+button {
+    margin-left:870px;
+    margin-right:auto;
+    width:100px;
+    height:50px;
+    margin-bottom:50px;
+    margin-top:100px;
+    display:block;
+    border-radius: 12px;
+    background-color: #f9f6f6;
+    font-family: -webkit-body;
+    font-size:medium
+}
+
+label {
+    font-family:cursive;
+}
