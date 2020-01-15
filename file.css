@@ -1,0 +1,32 @@
+html,body{
+    height: 100%;
+    background-color: white;
+}
+body {
+    padding-top: 15%;
+}
+div > img{
+    height: 10%;
+    width: 10%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+div.contenitore{
+    max-width: 200px;
+  margin: 0 auto;
+ 
+}
+form > div > label{
+color: rgb(3, 78, 177);
+font-size: 20px;
+font-weight:bolder;
+margin-left: 60px;
+}
+.btn-primary{
+    background-color: rgb(255, 123, 0);
+   border-color: rgb(255, 123, 0);
+   color: black;
+   font-weight: bolder;
+   margin: 40px 60px 10px;
+}
