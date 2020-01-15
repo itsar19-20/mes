@@ -20,6 +20,8 @@ public class Stazione {
     @Id
     private String codiceStazione;
 
+    
+    private SegnaleStazione ultimoStato; 
 	
     /*
      * getters 
@@ -35,6 +37,10 @@ public class Stazione {
 	public String getCodiceStazione() {
 		return codiceStazione;
 	}
+
+	public SegnaleStazione getUltimoStato() {
+		return ultimoStato;
+	}
 	
 	/*
 	 * setters
@@ -49,6 +55,10 @@ public class Stazione {
 
 	public void setCodiceStazione(String codiceStazione) {
 		this.codiceStazione = codiceStazione;
+	}
+
+	public void setUltimoStato(SegnaleStazione ultimoStato) {
+		this.ultimoStato = ultimoStato;
 	}
     
 }
