@@ -1,7 +1,9 @@
 package main;
 
-import model; 
-import javax.persistence.*; 
+import javax.persistence.EntityManager;
+
+import model.LineaDiProduzione;
+import utils.JPAUtil; 
 
 public class ProgrammaPrincipale {
 
@@ -10,13 +12,13 @@ public class ProgrammaPrincipale {
 		EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
 		
 		LineaDiProduzione lineaUno = new LineaDiProduzione(); 
-		lineaUno.nome = "Stampaggio componenti plastiche";
+		lineaUno.setNome("Stampaggio componenti plastiche");
 	
 		LineaDiProduzione lineaDue = new LineaDiProduzione(); 
-		lineaDue.nome = "Assemblaggio delle parti";
+		lineaDue.setNome("Assemblaggio delle parti");
 		
 		LineaDiProduzione lineaTre = new LineaDiProduzione(); 
-		lineaTre.nome = "Confezionamento";
+		lineaTre.setNome("Confezionamento");
 		
 		em.getTransaction().begin();
 		em.persist(lineaUno);

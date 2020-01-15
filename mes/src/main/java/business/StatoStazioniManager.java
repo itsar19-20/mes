@@ -35,7 +35,7 @@ public class StatoStazioniManager {
 		//TODO: fare in modo di poter stoppare il timer
 				//TODO: fare in modo che rimanga sempre un thread attivo con il timer
 		
-		while ( linea.getUltimoStato().getStatoLinea() == StatiLinea.avviata) {
+		while ( linea.getUltimoStato() == StatiLinea.avviata) {
 			
 			for ( Stazione st : linea.getStazioni()) {
 			
