@@ -13,6 +13,7 @@ public class ProgrammaPrincipale {
 
 	public static void main(String[] args) {
 
+		// creo un entity manager
 		EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
 		
 		//UNO
@@ -116,10 +117,17 @@ public class ProgrammaPrincipale {
 		lineaTre.setStazioni( elencoStazioniTRE); 
 		
 		
+		// scrive sul database le linee 
+		
+		//inizio
 		em.getTransaction().begin();
+		
+		//elabora...
 		em.persist(lineaUno);
 		em.persist(lineaDue);
 		em.persist(lineaTre); 
+		
+		// scrive
 		em.getTransaction().commit();
 		
 	}
