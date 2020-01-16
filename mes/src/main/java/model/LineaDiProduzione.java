@@ -50,6 +50,10 @@ public class LineaDiProduzione {
 		return codiceLinea;
 	}	
 
+	public List<StatoLinea> getStatiLinea() {
+		return statiLinea;
+	}
+	
 	public StatiLinea getUltimoStato() {
 		return this.ultimoStato;
 	}
@@ -73,12 +77,6 @@ public class LineaDiProduzione {
 	public void setUltimoStato(StatiLinea ultimoStato) {
 		this.ultimoStato = ultimoStato;
 	}
-
-
-	public List<StatoLinea> getStatiLinea() {
-		return statiLinea;
-	}
-
 
 	public void setStatiLinea(List<StatoLinea> statiLinea) {
 		this.statiLinea = statiLinea;
