@@ -87,5 +87,5 @@ public class Stazione {
 	public void setStatiStazione(List<StatoStazione> statiStazione) {
 		this.statiStazione = statiStazione;
 	}
-    
+   
 }
