@@ -7,8 +7,10 @@ import javax.persistence.*;
 public class StatoStazione {
 
 	
-	@Id	
+	@Id
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date TimeStamp;
+	@ManyToOne
 	private Stazione stazione;
 	private SegnaleStazione statoSegnale;
 	
