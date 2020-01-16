@@ -7,8 +7,11 @@ import javax.persistence.*;
 public class StatoLinea {
 
 	@Id
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date timestamp;
+	@ManyToOne
 	private LineaDiProduzione linea;
+	
 	private StatiLinea statoLinea;
 	
 	/* 

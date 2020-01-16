@@ -16,12 +16,13 @@ public class LineaDiProduzione {
     
     private String nome;
 
-    @OneToMany 
+    @OneToMany(mappedBy="linea", cascade = CascadeType.ALL)
     private List<Stazione> stazioni;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private String codiceLinea;
+    @OneToMany(mappedBy="linea")
+    private List<StatoLinea> statiLinea;
 
     private StatiLinea ultimoStato; 
 
@@ -50,7 +51,7 @@ public class LineaDiProduzione {
 	}	
 
 	public StatiLinea getUltimoStato() {
-		return null;
+		return this.ultimoStato;
 	}
 
 
@@ -71,6 +72,16 @@ public class LineaDiProduzione {
 	
 	public void setUltimoStato(StatiLinea ultimoStato) {
 		this.ultimoStato = ultimoStato;
+	}
+
+
+	public List<StatoLinea> getStatiLinea() {
+		return statiLinea;
+	}
+
+
+	public void setStatiLinea(List<StatoLinea> statiLinea) {
+		this.statiLinea = statiLinea;
 	}
 
 }
