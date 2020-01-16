@@ -56,6 +56,10 @@ public class Stazione {
 	public String getCodiceStazione() {
 		return codiceStazione;
 	}
+	
+	public List<StatoStazione> getStatiStazione() {
+		return statiStazione;
+	}
 
 	public SegnaleStazione getUltimoStato() {
 		return ultimoStato;
@@ -78,10 +82,6 @@ public class Stazione {
 
 	public void setUltimoStato(SegnaleStazione ultimoStato) {
 		this.ultimoStato = ultimoStato;
-	}
-
-	public List<StatoStazione> getStatiStazione() {
-		return statiStazione;
 	}
 
 	public void setStatiStazione(List<StatoStazione> statiStazione) {
