@@ -11,6 +11,18 @@ public class Stazione {
     public Stazione() {
 
     }
+    
+    /*
+     * alternative constructor
+     */
+    public Stazione( LineaDiProduzione linea, String nome, String codiceStazione) {
+    	
+    	this.linea = linea;
+    	this.nome = nome; 
+    	this.codiceStazione = codiceStazione; 
+    	this.ultimoStato = null; 
+    	
+    }
 
     @ManyToOne
     private LineaDiProduzione linea;
