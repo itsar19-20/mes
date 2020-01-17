@@ -5,7 +5,28 @@ import javax.persistence.*;
 
 @Entity
 public class StatoLinea {
+	
+	/*
+	 * default constructor
+	 */
+	public StatoLinea() {
 
+	}
+
+	/*
+	 * alternative constructor
+	 */
+	public StatoLinea( LineaDiProduzione linea, StatiLinea statoLinea) {
+		
+		this.linea = linea; 
+		this.statoLinea = statoLinea; 
+		
+		//genero il timestamp
+		
+		this.timestamp = new java.util.Date(); 
+		
+	}
+	
 	@Id
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date timestamp;
