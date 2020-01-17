@@ -4,6 +4,12 @@ import javax.persistence.*;
 @Entity
 public class Utente {
 	
+	public Utente (String nome, String password, String ruolo, int id) {
+		this.nome = nome;
+		this.password = password;
+		this.ruolo = ruolo;
+		this.id = id;
+	}
 	private String ruolo;
 	@Id
 	private int id;
@@ -13,6 +19,11 @@ public class Utente {
 	public Boolean verifica() {
 		/*da implementare*/
 		return null;
+		
+		
+		
+		
+		
 		
 	}
 

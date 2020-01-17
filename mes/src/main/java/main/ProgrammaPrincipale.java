@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 
 import model.LineaDiProduzione;
 import model.Stazione;
+import model.Utente;
 import utils.JPAUtil; 
 
 public class ProgrammaPrincipale {
@@ -129,6 +130,28 @@ public class ProgrammaPrincipale {
 		
 		// scrive
 		em.getTransaction().commit();
+		
+		
+		EntityManager emu = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
+		Utente utenteUno = new Utente("Giada Cosentino","password", "operatore",1);
+		Utente utenteDue = new Utente("Daniele Tozzi", "password", "operatore", 2);
+		Utente utenteTre = new Utente("Davide de Cristofaro", "password","operatore",3);
+		Utente utenteQuattro = new Utente("Giulio Cigno", "password", "operatore", 4);
+		
+	emu.getTransaction().begin();
+		emu.persist(utenteUno);
+		emu.persist(utenteDue);
+		emu.persist(utenteTre); 
+		emu.persist(utenteQuattro); 
+		emu.getTransaction().commit();
+				
+			   
+			
+				
+		
+		
+		
+		
 		
 	}
 
