@@ -1,6 +1,11 @@
 package model;
 
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Stazione {
@@ -31,6 +36,8 @@ public class Stazione {
     
     @Id
     private String codiceStazione;
+    @OneToMany(mappedBy="stazione")
+    private List<StatoStazione> statiStazione;
 
     
     private SegnaleStazione ultimoStato; 
@@ -48,6 +55,10 @@ public class Stazione {
     
 	public String getCodiceStazione() {
 		return codiceStazione;
+	}
+	
+	public List<StatoStazione> getStatiStazione() {
+		return statiStazione;
 	}
 
 	public SegnaleStazione getUltimoStato() {
@@ -72,5 +83,9 @@ public class Stazione {
 	public void setUltimoStato(SegnaleStazione ultimoStato) {
 		this.ultimoStato = ultimoStato;
 	}
-    
+
+	public void setStatiStazione(List<StatoStazione> statiStazione) {
+		this.statiStazione = statiStazione;
+	}
+   
 }

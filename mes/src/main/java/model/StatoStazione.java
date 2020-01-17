@@ -7,8 +7,10 @@ import javax.persistence.*;
 public class StatoStazione {
 
 	
-	@Id	
+	@Id
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date TimeStamp;
+	@ManyToOne
 	private Stazione stazione;
 	private SegnaleStazione statoSegnale;
 	
@@ -41,11 +43,6 @@ public class StatoStazione {
 	public void setStatoSegnale(SegnaleStazione statoSegnale) {
 		this.statoSegnale = statoSegnale;
 	}
-	
-	
-	
-	
-	
 	
 	
 }

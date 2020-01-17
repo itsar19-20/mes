@@ -1,0 +1,28 @@
+
+DATA MANAGER
+
+	getSegnaleFromStazione()
+	getSegnaleFromLinea()
+
+LINEA MANAGER 
+
+	elencoLinee()
+	avvia()
+	ferma()
+	inErrore()
+	inPausa()
+	getStatoLinea()
+
+STATO STAZIONI MANAGER
+
+	leggiStatoStazione()
+
+DATA FROM SCADA
+
+	getSegnaleFromStazione()
+	getSegnaleFromLinea()
+
+LINEA DI PRODUZIONE
+
+	aggiorna()
+
