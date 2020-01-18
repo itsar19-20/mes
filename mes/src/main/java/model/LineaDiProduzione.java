@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
 
 @Entity
+@NamedQuery( name="LineaDiProduzione.findAll", query="SELECT linea FROM LineaDiProduzione linea")
 public class LineaDiProduzione {
 
 	/**

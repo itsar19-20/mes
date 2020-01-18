@@ -44,9 +44,17 @@ public class LineaManager {
     /**
      * @param elenco
      */
-    public void elencoLinee(Set<LineaDiProduzione> elenco) {
-    	EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
+    public List<LineaDiProduzione> elencoLinee() {
+    	
+    	List<LineaDiProduzione> elenco = new ArrayList<>(); 
+    	
     	//TODO: implementare la ricerca delle linee nel db
+    	for( LineaDiProduzione linea : this.entityManager.createNamedQuery("LineaDiProduzione.findAll", LineaDiProduzione.class).getResultList()) {
+    		
+    		elenco.add( linea); 
+    	
+    	}
+    	return elenco; 
     }
 
     private void memorizzaStatoLinea( StatoLinea stato) {
@@ -62,9 +70,7 @@ public class LineaManager {
     public void avvia( LineaDiProduzione linea) {
         
     	linea.setUltimoStato( StatiLinea.avviata );
-    	
-    	StatoLinea stato = new StatoLinea( linea, StatiLinea.avviata);
-    	
+    	StatoLinea stato = new StatoLinea( linea, StatiLinea.avviata );
     	//scrive lo stato corrente della linea sul database
     	this.memorizzaStatoLinea( stato);  
     	
@@ -74,21 +80,33 @@ public class LineaManager {
      * @param LineaDiProduzione
      */
     public void ferma( LineaDiProduzione linea) {
-    	// TODO implementare la logica 
+    	
+    	linea.setUltimoStato( StatiLinea.ferma );
+    	StatoLinea stato = new StatoLinea( linea, StatiLinea.ferma );
+    	//scrive lo stato corrente della linea sul database
+    	this.memorizzaStatoLinea( stato);  
     }
     
     /**
      * @param LineaDiProduzione
      */
     public void inErrore( LineaDiProduzione linea) {
-    	// TODO implementare la logica di avvio di una linea
+    	
+    	linea.setUltimoStato( StatiLinea.inErrore );
+    	StatoLinea stato = new StatoLinea( linea, StatiLinea.inErrore );
+    	//scrive lo stato corrente della linea sul database
+    	this.memorizzaStatoLinea( stato);  
     }
     
     /**
      * @param LineaDiProduzione
      */
     public void inPausa( LineaDiProduzione linea) {
-    	// TODO implementare la logica di avvio di una linea
+    	
+    	linea.setUltimoStato( StatiLinea.inPausa );
+    	StatoLinea stato = new StatoLinea( linea, StatiLinea.inPausa );
+    	//scrive lo stato corrente della linea sul database
+    	this.memorizzaStatoLinea( stato);
     }
     
     /**
