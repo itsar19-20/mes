@@ -6,11 +6,14 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 
+import business.LineaManager; 
+
 import model.LineaDiProduzione;
 import model.SegnaleStazione;
 import model.StatiLinea;
 import model.StatoStazione;
 import model.Stazione;
+
 import utils.JPAUtil;
 
 public class StatoStazioniManager {
@@ -50,8 +53,8 @@ public class StatoStazioniManager {
 					
 					if( ss.getStatoSegnale() == SegnaleStazione.anomalia ) {
 						
-						LineaManager lm = new LineaManager(); 
-						lm.inErrore( linea.getCodiceLinea());
+						LineaManager lm = LineaManager.getInstance(em); 
+						lm.inErrore( linea);
 					}
 
 			}
