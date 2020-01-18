@@ -15,18 +15,9 @@ public class Utente {
 	private int id;
 	private String nome;
 	private String password;
-	
-	public Boolean verifica() {
-		/*da implementare*/
-		return null;
-		
-		
-		
-		
-		
-		
-	}
+	private boolean attivo;
 
+	
 	public String getRuolo() {
 		return ruolo;
 	}
@@ -58,5 +49,11 @@ public class Utente {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	public Boolean isAttivo() {
+		return attivo;
+		}
+		
+		public void setAttivo(boolean attivo) {
+			this.attivo = attivo;
+		}
 }
