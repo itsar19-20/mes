@@ -6,7 +6,9 @@ import model.Utente;
 import utils.JPAUtil;
 
 public class AuthenticationManager {
+	
 	public Utente login(String nome, String password) {
+	
 		Utente _return = null;
 		EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
 		

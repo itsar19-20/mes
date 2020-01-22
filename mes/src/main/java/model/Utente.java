@@ -14,17 +14,19 @@ public class Utente {
 	/*
 	 * alternative constructor
 	 */
-	public Utente (String nome, String password, String ruolo, int id) {
+	public Utente (String nome, String password, String ruolo) {
+		
 		this.nome = nome;
 		this.password = password;
 		this.ruolo = ruolo;
-		this.id = id;
 	}
 	
 	private String ruolo;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
 	private String nome;
 	private String password;
 	private boolean attivo;
