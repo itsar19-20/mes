@@ -13,6 +13,7 @@ import model.Utente;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
     
     /**
@@ -26,6 +27,7 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		AuthenticationManager am = new AuthenticationManager();
 		Utente u = am.login(request.getParameter("nome"), request.getParameter("password"));
 		if (u == null) {
