@@ -1,0 +1,37 @@
+html,body{
+    height: 100%;
+    background-color: white;
+}
+body {
+    padding-top: 5%;
+}
+ img{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: none;
+    display: block;
+    max-width:300px;
+    max-height:290px;
+    width: auto;
+    height: auto;
+    margin-bottom:25px;
+
+}
+div.contenitore{
+    max-width: 200px;
+  margin: 0 auto;
+ 
+}
+form > div > label{
+color: rgb(3, 78, 177);
+font-size: 20px;
+font-weight:bolder;
+margin-left: auto;
+}
+.btn-primary{
+    background-color: rgb(255, 123, 0);
+   border-color: rgb(255, 123, 0);
+   color: black;
+   font-weight: bolder;
+   margin: 40px 60px 10px;
+}
