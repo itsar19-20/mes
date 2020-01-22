@@ -31,9 +31,13 @@ public class LoginController extends HttpServlet {
 		AuthenticationManager am = new AuthenticationManager();
 		Utente u = am.login(request.getParameter("nome"), request.getParameter("password"));
 		if (u == null) {
-			request.getRequestDispatcher("/").forward(request, response);
+		
+			//appare messaggio di errore 
+			
+		
 		} else {
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			
+			request.getRequestDispatcher("???").forward(request, response);
 		}
 	}
 
