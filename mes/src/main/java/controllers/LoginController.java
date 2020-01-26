@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import business.AuthenticationManager;
 import model.Utente;
 
@@ -28,24 +30,26 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		AuthenticationManager am = new AuthenticationManager();
-		Utente u = am.login(request.getParameter("nome"), request.getParameter("password"));
-		if (u == null) {
 		
-			//appare messaggio di errore 
-			
-		
-		} else {
-			
-			request.getRequestDispatcher("???").forward(request, response);
-		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		if (username == null || password == null) {
+			response.sendError(400, "username e password sono obbligatorie.");
+			return;
+		}
+		AuthenticationManager lm = new AuthenticationManager();
+		Utente u = lm.login(username, password);
+		request.getSession().setAttribute("user", u);
+		ObjectMapper om = new ObjectMapper();
+		response.setContentType("application/json");
+		response.getWriter().append(om.writeValueAsString(u));
 	}
 
 }
