@@ -1,4 +1,6 @@
 package model;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -30,6 +32,8 @@ public class Utente {
 	private String nome;
 	private String password;
 	private boolean attivo;
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	private List<Nota> note;
 
 	
 	public String getRuolo() {
