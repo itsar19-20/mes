@@ -44,12 +44,13 @@ public class LoginController extends HttpServlet {
 			response.sendError(400, "username e password sono obbligatorie.");
 			return;
 		}
-		AuthenticationManager lm = new AuthenticationManager();
-		Utente u = lm.login(username, password);
-		request.getSession().setAttribute("user", u);
+		AuthenticationManager auth = new AuthenticationManager();
+		Utente user = auth.login(username, password);
+		
+		request.getSession().setAttribute("user", user);
 		ObjectMapper om = new ObjectMapper();
 		response.setContentType("application/json");
-		response.getWriter().append(om.writeValueAsString(u));
+		response.getWriter().append(om.writeValueAsString(user));
 	}
 
 }
