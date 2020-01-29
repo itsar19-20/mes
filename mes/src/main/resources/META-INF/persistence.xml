@@ -12,6 +12,11 @@
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://mes.caoojblgegbu.eu-central-1.rds.amazonaws.com:3306/mes_db"/>
 			<property name="javax.persistence.jdbc.user" value="admin"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>	
+			<property name="javax.persistence.jdbc.user" value="admin"/>
+			<property name="javax.persistence.schema-generation.database.action" value="create"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+			<property name="javax.persistence.jdbc.password" value=""/>	
+			
 		</properties>
 	</persistence-unit>
 </persistence>

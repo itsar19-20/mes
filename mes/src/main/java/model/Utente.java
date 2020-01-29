@@ -35,6 +35,7 @@ public class Utente {
 //	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 //	private List<Nota> note;
 
+
 	
 	public String getRuolo() {
 		return ruolo;
@@ -69,9 +70,9 @@ public class Utente {
 	}
 	public Boolean isAttivo() {
 		return attivo;
-		}
+	}
 		
-		public void setAttivo(boolean attivo) {
+	public void setAttivo(boolean attivo) {
 			this.attivo = attivo;
-		}
+	}
 }
