@@ -11,8 +11,7 @@
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://mes.caoojblgegbu.eu-central-1.rds.amazonaws.com:3306/mes_db"/>
 			<property name="javax.persistence.jdbc.user" value="admin"/>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
-			<property name="javax.persistence.jdbc.password" value="16KsFmVxiuz171rFSWmv"/>	
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>	
 		</properties>
 	</persistence-unit>
 </persistence>
