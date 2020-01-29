@@ -11,8 +11,13 @@
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://mes.caoojblgegbu.eu-central-1.rds.amazonaws.com:3306/mes_db"/>
 			<property name="javax.persistence.jdbc.user" value="admin"/>
+<<<<<<< HEAD
 			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>	
+=======
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+			<property name="javax.persistence.jdbc.password" value=""/>	
+>>>>>>> branch 'master' of https://github.com/itsar19-20/mes
 		</properties>
 	</persistence-unit>
 </persistence>
