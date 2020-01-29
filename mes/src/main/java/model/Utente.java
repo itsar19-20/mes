@@ -32,8 +32,8 @@ public class Utente {
 	private String nome;
 	private String password;
 	private boolean attivo;
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	private List<Nota> note;
+	//@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	//private List<Nota> note;
 
 	
 	public String getRuolo() {
