@@ -70,9 +70,9 @@ public class Utente {
 	}
 	public Boolean isAttivo() {
 		return attivo;
-		}
+	}
 		
-		public void setAttivo(boolean attivo) {
+	public void setAttivo(boolean attivo) {
 			this.attivo = attivo;
-		}
+	}
 }
