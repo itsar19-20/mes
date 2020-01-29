@@ -9,6 +9,10 @@ public class Stazione {
 	private String tagStazione;
 	
 	private int stato;
+	
+	private Stazione precedente;
+	
+	private Stazione successiva;
 
 	public Linea getLinea() {
 		return linea;
@@ -44,6 +48,22 @@ public class Stazione {
 
 	public void setStato(int stato) {
 		this.stato = stato;
+	}
+
+	public Stazione getPrecedente() {
+		return precedente;
+	}
+
+	public void setPrecedente(Stazione precedente) {
+		this.precedente = precedente;
+	}
+
+	public Stazione getSuccessiva() {
+		return successiva;
+	}
+
+	public void setSuccessiva(Stazione successiva) {
+		this.successiva = successiva;
 	}
 
 }

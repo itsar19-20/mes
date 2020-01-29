@@ -16,27 +16,22 @@ import itsar.mes.model.Stazione;
 @RestController
 public class StazioneController {
 
-	
-	@RequestMapping(path = {"/stazioni", "/stazioni/{tagLinea}", "/stazioni/{tagLinea}/{tagStazione}"}, method = RequestMethod.GET )
-	public @ResponseBody List<Stazione> stazioni(
-			@PathVariable(required = false) String tagLinea,
+	@RequestMapping(path = { "/stazioni", "/stazioni/{tagLinea}",
+			"/stazioni/{tagLinea}/{tagStazione}" }, method = RequestMethod.GET)
+	public @ResponseBody List<Stazione> stazioni(@PathVariable(required = false) String tagLinea,
 			@PathVariable(required = false) String tagStazione) {
 		List<Stazione> stazioni = StazioniManager.listStazioni();
 		if (tagLinea != null) {
-			stazioni = stazioni
-					.stream()
-					.filter(s -> s.getLinea().getTag().contentEquals(tagLinea))
+			stazioni = stazioni.stream().filter(s -> s.getLinea().getTag().contentEquals(tagLinea))
 					.collect(Collectors.toList());
 		}
 		if (tagStazione != null) {
-			stazioni = stazioni
-					.stream()
-					.filter(s -> s.getTagStazione().contentEquals(tagStazione))
+			stazioni = stazioni.stream().filter(s -> s.getTagStazione().contentEquals(tagStazione))
 					.collect(Collectors.toList());
-		}		
+		}
 		return stazioni;
 	}
-	
+
 	@RequestMapping(path = {"/stato-stazioni", "/stato-stazioni/{tagLinea}", "/stato-stazioni/{tagLinea}/{tagStazione}"}, method = RequestMethod.GET )
 	public @ResponseBody List<Stazione> statoStazioni(
 			@PathVariable(required = false) String tagLinea,
@@ -54,10 +49,14 @@ public class StazioneController {
 					.filter(s -> s.getTagStazione().contentEquals(tagStazione))
 					.collect(Collectors.toList());
 		}
-		stazioni.forEach(s -> {
-			s.setStato(StatusManager.nextStatus(s.getStato()));
+		stazioni
+		.forEach(s -> {
+			s.setStato(StatusManager.nextStatus(s.getStato(), (s.getPrecedente() == null ? 2 : s.getPrecedente().getStato())));
+			if (s.getPrecedente() != null && s.getStato() == 1 && s.getPrecedente().getStato() == 2) {
+				s.getPrecedente().setStato(0);
+			}
 		});
 		return stazioni;
-	}
-	
+}
+
 }
