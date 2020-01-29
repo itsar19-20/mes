@@ -29,8 +29,7 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		response.sendRedirect("./html/login.html");
 	}
 
 	/**
@@ -49,7 +48,9 @@ public class LoginController extends HttpServlet {
 		request.getSession().setAttribute("user", u);
 		ObjectMapper om = new ObjectMapper();
 		response.setContentType("application/json");
-		response.getWriter().append(om.writeValueAsString(u));
+		String jsonUser = om.writeValueAsString(u);
+		System.out.println(jsonUser);
+		response.getWriter().append(jsonUser).close();
 	}
 
 }

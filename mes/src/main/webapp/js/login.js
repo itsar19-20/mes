@@ -1,5 +1,6 @@
 $(() => {
-                        // una funzione () senza parametri
+    localStorage.removeItem('user');
+    // una funzione () senza parametri
     $('#btnLogin').click(() => {
         $.ajax({
             url: '/login',
@@ -16,7 +17,7 @@ $(() => {
                 localStorage.setItem('user', JSON.stringify(utente));
                 location.href = './home.html';
             } else {
-                localStorage.removeItem('user');
+                $('#msgFail').show();
             }
         })
     });
