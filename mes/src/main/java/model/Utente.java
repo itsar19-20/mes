@@ -32,13 +32,9 @@ public class Utente {
 	private String nome;
 	private String password;
 	private boolean attivo;
-<<<<<<< HEAD
-	//@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	//private List<Nota> note;
-=======
 //	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 //	private List<Nota> note;
->>>>>>> branch 'master' of https://github.com/itsar19-20/mes
+
 
 	
 	public String getRuolo() {

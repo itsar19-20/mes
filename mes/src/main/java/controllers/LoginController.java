@@ -49,13 +49,12 @@ public class LoginController extends HttpServlet {
 		request.getSession().setAttribute("user", user);
 		ObjectMapper om = new ObjectMapper();
 		response.setContentType("application/json");
-<<<<<<< HEAD
+
 		response.getWriter().append(om.writeValueAsString(user));
-=======
-		String jsonUser = om.writeValueAsString(u);
+
+		String jsonUser = om.writeValueAsString(user);
 		System.out.println(jsonUser);
 		response.getWriter().append(jsonUser).close();
->>>>>>> branch 'master' of https://github.com/itsar19-20/mes
 	}
 
 }
