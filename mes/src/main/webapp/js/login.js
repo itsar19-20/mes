@@ -1,5 +1,7 @@
 $(() => {
-    localStorage.removeItem('user');
+    
+	localStorage.removeItem('user');
+	
     // una funzione () senza parametri
     $('#btnLogin').click(() => {
         $.ajax({
@@ -11,14 +13,20 @@ $(() => {
             }
         })
 
-              // una funzione che ha parametro UTENTE 
+        // una funzione che ha parametro UTENTE dal backend
         .done((utente) => {
+            
+            console.log(utente);
+            
             if (utente) {
+                
                 localStorage.setItem('user', JSON.stringify(utente));
-                location.href = './home.html';
+                location.replace('/linea'); 
+                
             } else {
                 $('#msgFail').show();
             }
         })
+        .fail((a, b) => console.log('fail!!', a, b));
     });
 });

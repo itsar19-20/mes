@@ -36,7 +36,9 @@ public class StatoStazioniManager {
 	public void avviaTimerLetturaStazioni( LineaDiProduzione linea) {
 		
 		//TODO: fare in modo di poter stoppare il timer
-				//TODO: fare in modo che rimanga sempre un thread attivo con il timer
+		//TODO: fare in modo che rimanga sempre un thread attivo con il timer
+		
+		/*
 		
 		while ( linea.getUltimoStato() == StatiLinea.avviata) {
 			
@@ -66,7 +68,7 @@ public class StatoStazioniManager {
 			}
 			
 			
-		}
+		}*/
 	}
 	
 	/* suggerimento del professore

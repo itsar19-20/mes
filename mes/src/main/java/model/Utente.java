@@ -3,6 +3,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Utente {
 	
@@ -30,6 +32,7 @@ public class Utente {
 	private int id;
 	
 	private String nome;
+	@JsonIgnore	// non serializza questo valore
 	private String password;
 	private boolean attivo;
 //	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)

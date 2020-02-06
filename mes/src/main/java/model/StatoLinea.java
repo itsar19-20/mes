@@ -1,7 +1,9 @@
 package model;
 
 import java.util.Date;
-import javax.persistence.*; 
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore; 
 
 @Entity
 public class StatoLinea {
@@ -31,6 +33,7 @@ public class StatoLinea {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date timestamp;
 	@ManyToOne
+	@JsonIgnore
 	private LineaDiProduzione linea;
 	
 	private StatiLinea statoLinea;

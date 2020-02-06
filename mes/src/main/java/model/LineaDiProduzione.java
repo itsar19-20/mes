@@ -3,6 +3,8 @@ package model;
 import java.util.*;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @NamedQuery( name="LineaDiProduzione.findAll", query="SELECT linea FROM LineaDiProduzione linea")
 public class LineaDiProduzione {
@@ -14,7 +16,7 @@ public class LineaDiProduzione {
 
     }
 
-    
+   
     private String nome;
 
     @OneToMany(mappedBy="linea", cascade = CascadeType.ALL)
@@ -22,10 +24,9 @@ public class LineaDiProduzione {
 
     @Id
     private String codiceLinea;
+    
     @OneToMany(mappedBy="linea")
     private List<StatoLinea> statiLinea;
-
-    private StatiLinea ultimoStato; 
 
 
 	/**
@@ -54,10 +55,6 @@ public class LineaDiProduzione {
 	public List<StatoLinea> getStatiLinea() {
 		return statiLinea;
 	}
-	
-	public StatiLinea getUltimoStato() {
-		return this.ultimoStato;
-	}
 
 
 	/*
@@ -74,13 +71,15 @@ public class LineaDiProduzione {
 	public void setCodiceLinea(String codiceLinea) {
 		this.codiceLinea = codiceLinea;
 	}
-	
-	public void setUltimoStato(StatiLinea ultimoStato) {
-		this.ultimoStato = ultimoStato;
-	}
 
 	public void setStatiLinea(List<StatoLinea> statiLinea) {
 		this.statiLinea = statiLinea;
 	}
 
+
+	@Override
+	public String toString() {
+		return "LineaDiProduzione [nome=" + nome + ", codiceLinea=" + codiceLinea + "]";
+	}
+	
 }

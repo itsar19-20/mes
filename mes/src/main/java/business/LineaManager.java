@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import model.LineaDiProduzione;
 import model.StatiLinea;
 import model.StatoLinea;
+import model.Utente;
 import utils.JPAUtil;
 
 /**
@@ -37,8 +38,9 @@ public class LineaManager {
     
     public static LineaManager getInstance( EntityManager em) {
     	
-    	if (instance == null)
+    	if( instance == null)
 			instance = new LineaManager( em);
+    	
 		return instance;
     }
     /**
@@ -48,7 +50,6 @@ public class LineaManager {
     	
     	List<LineaDiProduzione> elenco = new ArrayList<>(); 
     	
-    	//TODO: implementare la ricerca delle linee nel db
     	for( LineaDiProduzione linea : this.entityManager.createNamedQuery("LineaDiProduzione.findAll", LineaDiProduzione.class).getResultList()) {
     		
     		elenco.add( linea); 
@@ -69,7 +70,6 @@ public class LineaManager {
      */
     public void avvia( LineaDiProduzione linea) {
         
-    	linea.setUltimoStato( StatiLinea.avviata );
     	StatoLinea stato = new StatoLinea( linea, StatiLinea.avviata );
     	//scrive lo stato corrente della linea sul database
     	this.memorizzaStatoLinea( stato);  
@@ -77,11 +77,52 @@ public class LineaManager {
     }
 
     /**
+     * @param String
+     * @return LineaDiProduzione
+     */
+    public LineaDiProduzione getLinea( String codiceLinea ){
+    	
+    	// JPQL
+    	List<LineaDiProduzione> result = this.entityManager.createQuery("select l from LineaDiProduzione l where l.codiceLinea = :id", LineaDiProduzione.class)
+    							.setParameter("id", codiceLinea)
+    							.getResultList();
+
+    	LineaDiProduzione _return = null; 
+    	
+    	if( ! result.isEmpty()) {
+    		
+    		_return = result.get(0); 
+    	}
+    	
+    	return _return; 
+    }
+    
+    /**
+     * @param LineaDiProduzione
+     * @return
+     */
+    public StatoLinea getStatoLinea( String codiceLinea) {
+        
+    	// JPQL
+    	List<StatoLinea> result = this.entityManager.createQuery("select s from StatoLinea s where s.linea.codiceLinea = :id", StatoLinea.class)
+    							.setParameter("id", codiceLinea)
+    							.getResultList();
+
+    	StatoLinea _return = null; 
+    	
+    	if( ! result.isEmpty()) {
+    		
+    		_return = result.get(0); 
+    	}
+    	
+    	return _return;
+    }
+    
+    /**
      * @param LineaDiProduzione
      */
     public void ferma( LineaDiProduzione linea) {
     	
-    	linea.setUltimoStato( StatiLinea.ferma );
     	StatoLinea stato = new StatoLinea( linea, StatiLinea.ferma );
     	//scrive lo stato corrente della linea sul database
     	this.memorizzaStatoLinea( stato);  
@@ -92,7 +133,6 @@ public class LineaManager {
      */
     public void inErrore( LineaDiProduzione linea) {
     	
-    	linea.setUltimoStato( StatiLinea.inErrore );
     	StatoLinea stato = new StatoLinea( linea, StatiLinea.inErrore );
     	//scrive lo stato corrente della linea sul database
     	this.memorizzaStatoLinea( stato);  
@@ -103,19 +143,11 @@ public class LineaManager {
      */
     public void inPausa( LineaDiProduzione linea) {
     	
-    	linea.setUltimoStato( StatiLinea.inPausa );
     	StatoLinea stato = new StatoLinea( linea, StatiLinea.inPausa );
     	//scrive lo stato corrente della linea sul database
     	this.memorizzaStatoLinea( stato);
     }
     
-    /**
-     * @param LineaDiProduzione
-     * @return
-     */
-    public StatiLinea getStatoLinea( LineaDiProduzione linea) {
-        
-        return linea.getUltimoStato();
-    }
+    
 
 }

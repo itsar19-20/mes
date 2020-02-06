@@ -17,18 +17,18 @@ import business.AuthenticationManager;
 import business.ResponseWriter;
 import model.Utente;
 
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
+@WebServlet("/linea")
+public class LineaController extends HttpServlet {
 	
-	private static Logger log = LoggerFactory.getLogger(LoginController.class);
+	private static Logger log = LoggerFactory.getLogger(LineaController.class);
 	
 	private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
-        super();
+    public LineaController() {
+    	super(); 
     }
 
 	/**
@@ -36,12 +36,12 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		log.debug("controllers: LoginController: doGET()");
+		log.debug("controllers: LineaController: doGET()");
 		
 		ResponseWriter respoWriter = new ResponseWriter(); 
 		
 		//restituisce la pagina di login
-		respoWriter.write("C:\\Users\\user\\git\\mes_master\\mes\\src\\main\\webapp\\WEB-INF\\login.html", response);
+		respoWriter.write("C:\\Users\\user\\git\\mes_master\\mes\\src\\main\\webapp\\WEB-INF\\linea.html", response);
 	}
 
 	/**
@@ -49,24 +49,7 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		log.debug("controllers: LoginController: doPOST()");
-		
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		if (username == null || password == null) {
-			response.sendError(400, "username e password sono obbligatorie.");
-			return;
-		}
-		AuthenticationManager auth = new AuthenticationManager();
-		Utente user = auth.login(username, password);
-		
-		//request.getSession().setAttribute("user", user);
-		ObjectMapper om = new ObjectMapper();
-		response.setContentType("application/json");
-
-		String jsonUser = om.writeValueAsString(user);
-		response.getWriter().append(jsonUser).close();
-		
+		log.debug("controllers: LineaController: doPOST()");
 	}
 
 }

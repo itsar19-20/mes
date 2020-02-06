@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Stazione {
 
@@ -25,22 +27,21 @@ public class Stazione {
     	this.linea = linea;
     	this.nome = nome; 
     	this.codiceStazione = codiceStazione; 
-    	this.ultimoStato = null; 
     	
     }
 
     @ManyToOne
+    @JsonIgnore
     private LineaDiProduzione linea;
 
     private String nome; 
     
     @Id
     private String codiceStazione;
-    @OneToMany(mappedBy="stazione")
-    private List<StatoStazione> statiStazione;
-
     
-    private SegnaleStazione ultimoStato; 
+    @OneToMany(mappedBy="stazione")
+    @JsonIgnore
+    private List<StatoStazione> statiStazione;
 	
     /*
      * getters 
@@ -61,10 +62,6 @@ public class Stazione {
 		return statiStazione;
 	}
 
-	public SegnaleStazione getUltimoStato() {
-		return ultimoStato;
-	}
-	
 	/*
 	 * setters
 	 */
@@ -78,10 +75,6 @@ public class Stazione {
 
 	public void setCodiceStazione(String codiceStazione) {
 		this.codiceStazione = codiceStazione;
-	}
-
-	public void setUltimoStato(SegnaleStazione ultimoStato) {
-		this.ultimoStato = ultimoStato;
 	}
 
 	public void setStatiStazione(List<StatoStazione> statiStazione) {
