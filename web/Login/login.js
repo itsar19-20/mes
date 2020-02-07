@@ -8,7 +8,7 @@ $(() => {
             data: { 
                 username: $('#inputUsername').val(), 
                 password: $('#inputPassword').val()
-            }
+            }    
         })
 
               // una funzione che ha parametro UTENTE 
@@ -20,6 +20,7 @@ $(() => {
                 $('#msgFail').show();
             }
         })
+        .fail((a, b) => console.log('fail!!', a, b));
     });
 });
 
