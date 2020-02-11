@@ -16,7 +16,7 @@ public class ProgrammaPrincipale {
 
 		// creo un entity manager
 		EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
-
+		System.out.println("debug...");
 		//generaLinee(em); 
 		
 		//generaUtenti(em); 

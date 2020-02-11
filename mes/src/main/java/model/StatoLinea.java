@@ -1,3 +1,4 @@
+
 package model;
 
 import java.util.Date;
@@ -11,7 +12,7 @@ public class StatoLinea {
 	/*
 	 * default constructor
 	 */
-	public StatoLinea() {
+	protected StatoLinea() {
 
 	}
 
@@ -30,6 +31,7 @@ public class StatoLinea {
 	}
 	
 	@Id
+	private long id; 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date timestamp;
 	@ManyToOne

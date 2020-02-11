@@ -4,12 +4,16 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Messaggio {
 
 	@Id
-	private Date id;		//verificare se il tipo è appropriato
+	private long id;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date timestamp;		//verificare se il tipo è appropriato
 	private String testo;
         
 	/*
@@ -21,7 +25,7 @@ public class Messaggio {
 		return this.testo;
 	}
 	
-	public Date getId() {
+	public long getId() {
 	
 		return this.id; 
 	}

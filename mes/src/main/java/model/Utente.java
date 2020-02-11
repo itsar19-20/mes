@@ -14,7 +14,7 @@ public class Utente {
 	public Utente() {
 		
 	}
-	// TODO: pensare a come risolvere il problema dell'univocità del nome utente (per l'autenticazione)
+	//TODO: pensare a come risolvere il problema dell'univocita' del nome utente (per l'autenticazione)
 	/*
 	 * alternative constructor
 	 */

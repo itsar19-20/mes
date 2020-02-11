@@ -7,7 +7,29 @@ import javax.persistence.*;
 public class StatoStazione {
 
 	
+	/*
+	 * default constructor
+	 */
+	protected StatoStazione() {
+
+	}
+
+	/*
+	 * alternative constructor
+	 */
+	public StatoStazione( Stazione stazione, SegnaleStazione segnale) {
+		
+		this.stazione = stazione; 
+		this.statoSegnale = segnale; 
+		
+		//genero il timestamp
+		
+		this.TimeStamp = new java.util.Date(); 
+		
+	}
+	
 	@Id
+	private long id; 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date TimeStamp;
 	@ManyToOne
