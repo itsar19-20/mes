@@ -94,7 +94,7 @@ public class StatoStazioniManager {
 	
 
 	public StatoStazione leggiStatoStazione(Stazione st) {
-		StatoStazione _return = new StatoStazione();
+		/*StatoStazione _return = new StatoStazione( stazione, ???);
 		// leggo da DataFromSCADA lo stato attale della stazione indicata
 		// ??
 		//TODO: implemetare il client per leggere lo stato dal servizio web SCADA (per il prof.)
@@ -102,7 +102,9 @@ public class StatoStazioniManager {
 		_return.setStazione(st);
 		_return.setTimeStamp(new Date());
 		
-		return _return;
+		return _return;*/
+		
+		return null; 
 	}
 
 }

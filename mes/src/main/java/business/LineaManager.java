@@ -104,7 +104,7 @@ public class LineaManager {
     public StatoLinea getStatoLinea( String codiceLinea) {
         
     	// JPQL
-    	List<StatoLinea> result = this.entityManager.createQuery("select s from StatoLinea s where s.linea.codiceLinea = :id", StatoLinea.class)
+    	List<StatoLinea> result = this.entityManager.createQuery("select s from StatoLinea s where s.linea.codiceLinea = :id ORDER BY s.timestamp DESC", StatoLinea.class)
     							.setParameter("id", codiceLinea)
     							.getResultList();
 
