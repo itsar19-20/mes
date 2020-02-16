@@ -5,7 +5,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import business.LineaManager;
+import business.StatoStazioniManager;
 import model.LineaDiProduzione;
+import model.SegnaleStazione;
+import model.StatoStazione;
 import model.Stazione;
 import model.Utente;
 import utils.JPAUtil; 
@@ -16,11 +20,20 @@ public class ProgrammaPrincipale {
 
 		// creo un entity manager
 		EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
-		System.out.println("debug...");
-		//generaLinee(em); 
 		
-		//generaUtenti(em); 
-					
+		generaLinee(em); 
+		
+		generaUtenti(em);
+		
+		StatoStazioniManager sm = StatoStazioniManager.getInstance(); 
+		LineaManager lm = LineaManager.getInstance(); 
+		
+		StatoStazione stato = new StatoStazione( lm.getStazione("01_00"), SegnaleStazione.libera); 
+		sm.memorizzaStatoStazione(stato);
+		
+		stato = sm.leggiStatoStazione("01_00");
+		System.out.println( stato.getStatoSegnale());
+		
 	}
 	
 	public static void generaUtenti( EntityManager em) {

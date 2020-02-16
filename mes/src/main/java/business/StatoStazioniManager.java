@@ -2,6 +2,7 @@ package business;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import business.LineaManager;
 import model.LineaDiProduzione;
 import model.SegnaleStazione;
 import model.StatiLinea;
+import model.StatoLinea;
 import model.StatoStazione;
 import model.Stazione;
 
@@ -22,12 +24,19 @@ public class StatoStazioniManager {
 
 
 	private static StatoStazioniManager instance;
-
+	private EntityManager entityManager; 
+	
 	/*
-	 * 
+	 * 	private default constructor
 	 */
+	private StatoStazioniManager() {
+		
+		EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();	
+		this.entityManager = em; 
+	}
 	
 	public static StatoStazioniManager getInstance() {
+		
 		if (instance == null)
 			instance = new StatoStazioniManager();
 		return instance;
@@ -91,20 +100,34 @@ public class StatoStazioniManager {
 		}
 	}*/
 	
+	//TODO: cambiare visibilità
+	public void memorizzaStatoStazione( StatoStazione stato) {
+		
+		this.entityManager.getTransaction().begin();
+    	this.entityManager.persist(stato); 
+    	this.entityManager.getTransaction().commit();
+	}
+		
 	
+	public StatoStazione leggiStatoStazione( String codiceStazione) {
+		
+		
+		// creo un entity manager
+		EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
+		
+		// JPQL
+    	List<StatoStazione> result = em.createQuery("select s from StatoStazione s where s.stazione.codiceStazione = :id ORDER BY s.TimeStamp DESC", StatoStazione.class)
+    							.setParameter("id", codiceStazione)
+    							.getResultList();
 
-	public StatoStazione leggiStatoStazione(Stazione st) {
-		/*StatoStazione _return = new StatoStazione( stazione, ???);
-		// leggo da DataFromSCADA lo stato attale della stazione indicata
-		// ??
-		//TODO: implemetare il client per leggere lo stato dal servizio web SCADA (per il prof.)
-		_return.setStatoSegnale(SegnaleStazione.libera);
-		_return.setStazione(st);
-		_return.setTimeStamp(new Date());
-		
-		return _return;*/
-		
-		return null; 
+    	StatoStazione _return = null; 
+    	
+    	if( ! result.isEmpty()) {
+    		
+    		_return = result.get(0); 
+    	}
+    	
+    	return _return; 
 	}
 
 }
