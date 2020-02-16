@@ -12,7 +12,7 @@
 			<property name="javax.persistence.jdbc.user" value="admin"/>
 			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
-			<property name="javax.persistence.jdbc.password" value="16KsFmVxiuz171rFSWmv"/>
+			<property name="javax.persistence.jdbc.password" value=""/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>	
 			
 		</properties>
