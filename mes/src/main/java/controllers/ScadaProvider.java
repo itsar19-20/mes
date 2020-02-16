@@ -51,7 +51,7 @@ public class ScadaProvider extends HttpServlet {
 			log.debug("controllers: ScadaProvider: doGET()");
 			
 			EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
-			LineaManager lm = LineaManager.getInstance(em); 
+			LineaManager lm = LineaManager.getInstance(); 
 			
 			List<LineaDiProduzione> linee = lm.elencoLinee(); 
 			

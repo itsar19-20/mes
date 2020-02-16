@@ -53,10 +53,11 @@ public class ServiceController extends HttpServlet {
 		log.debug("controllers.ServiceController: doPOST()");
 		
 		EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
-		LineaManager lm = LineaManager.getInstance( em);
+		LineaManager lm = LineaManager.getInstance();
 	
 		
-		String id = request.getParameter("id"); 
+		String id = request.getParameter("id");
+		log.debug("controllers.ServiceController: doPOST(): request.id = "+ id);
 	
 		LineaDiProduzione linea = lm.getLinea( id); 
 	

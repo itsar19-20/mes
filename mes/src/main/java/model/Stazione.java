@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -28,6 +29,9 @@ public class Stazione {
     	this.nome = nome; 
     	this.codiceStazione = codiceStazione; 
     	
+    	this.statiStazione = new ArrayList<>();
+    	this.statiStazione.add( new StatoStazione( this, SegnaleStazione.libera));
+    	
     }
 
     @ManyToOne
@@ -40,7 +44,6 @@ public class Stazione {
     private String codiceStazione;
     
     @OneToMany(mappedBy="stazione")
-    @JsonIgnore
     private List<StatoStazione> statiStazione;
 	
     /*

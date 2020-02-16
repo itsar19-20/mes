@@ -11,7 +11,6 @@ public class Prodotto {
 	private String nome;
 	private String categoria;
 	private float prezzo;
-	private String materiale;
 	
 	//Getters e Setters
 	//
@@ -39,11 +38,5 @@ public class Prodotto {
 	}
 	public void setPrezzo(float prezzo) {
 		this.prezzo = prezzo;
-	}
-	public String getMateriale() {
-		return materiale;
-	}
-	public void setMateriale(String materiale) {
-		this.materiale = materiale;
 	}
 }

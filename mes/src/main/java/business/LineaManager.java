@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import model.LineaDiProduzione;
 import model.StatiLinea;
 import model.StatoLinea;
+import model.Stazione;
 import model.Utente;
 import utils.JPAUtil;
 
@@ -25,21 +26,16 @@ public class LineaManager {
      * Default constructor
      */
     private LineaManager() {
-    	
+    
+    	EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
+    	this.entityManager = em;
     }
     
-    /*
-     * alternative constructor
-     */
-    private LineaManager( EntityManager em) {
     
-    	this.entityManager = em; 
-    }
-    
-    public static LineaManager getInstance( EntityManager em) {
+    public static LineaManager getInstance() {
     	
     	if( instance == null)
-			instance = new LineaManager( em);
+			instance = new LineaManager();
     	
 		return instance;
     }
@@ -120,6 +116,28 @@ public class LineaManager {
     
     /**
      * @param LineaDiProduzione
+     * @return Stazione
+     */
+    public Stazione getStazione( String codiceStazione) {
+		
+    	// JPQL
+    	List<Stazione> result = this.entityManager.createQuery("select s from Stazione s where s.codiceStazione = :id", Stazione.class)
+    							.setParameter("id", codiceStazione)
+    							.getResultList();
+
+    	Stazione _return = null; 
+    	
+    	if( ! result.isEmpty()) {
+    		
+    		_return = result.get(0); 
+    	}
+    	
+    	return _return;
+    }
+    
+    /**
+     * @param LineaDiProduzione
+     * @return
      */
     public void ferma( LineaDiProduzione linea) {
     	

@@ -2,6 +2,8 @@ package model;
 
 import java.util.Date;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
  
 @Entity
 public class StatoStazione {
@@ -33,6 +35,7 @@ public class StatoStazione {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date TimeStamp;
 	@ManyToOne
+	@JsonIgnore
 	private Stazione stazione;
 	private SegnaleStazione statoSegnale;
 	
