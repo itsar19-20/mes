@@ -14,10 +14,8 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
-
-
-
         android:scaleType="fitXY"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toTopOf="@+id/editText5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -31,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ems="10"
-        android:hint="            username"
+        android:hint="username"
         android:inputType="textPersonName"
         android:textColor="#0A0707"
         app:layout_constraintBottom_toTopOf="@+id/button"
@@ -47,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ems="10"
-        android:hint="            password"
+        android:hint="password"
         android:inputType="textPassword"
         android:textColor="#130707"
         app:layout_constraintBottom_toTopOf="@+id/button"
