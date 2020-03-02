@@ -20,12 +20,14 @@ public class LineaDiProduzione {
     private String nome;
 
     @OneToMany(mappedBy="linea", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Stazione> stazioni;
 
     @Id
     private String codiceLinea;
     
     @OneToMany(mappedBy="linea")
+    @JsonIgnore
     private List<StatoLinea> statiLinea;
 
 

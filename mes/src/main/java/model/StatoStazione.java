@@ -35,7 +35,6 @@ public class StatoStazione {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date TimeStamp;
 	@ManyToOne
-	@JsonIgnore
 	private Stazione stazione;
 	private SegnaleStazione statoSegnale;
 	

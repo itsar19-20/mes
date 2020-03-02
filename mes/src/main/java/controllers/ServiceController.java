@@ -1,6 +1,9 @@
 package controllers;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -16,7 +19,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import business.LineaManager;
 import business.ResponseWriter;
+import business.StatoStazioniManager;
 import model.LineaDiProduzione;
+import model.StatoStazione;
+import model.Stazione;
 import utils.JPAUtil;
 
 @WebServlet("/home")
@@ -52,21 +58,15 @@ public class ServiceController extends HttpServlet {
 		
 		log.debug("controllers.ServiceController: doPOST()");
 		
-		EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
-		LineaManager lm = LineaManager.getInstance();
-	
+		LineaManager lm = LineaManager.getInstance();	
 		
-		String id = request.getParameter("id");
-		log.debug("controllers.ServiceController: doPOST(): request.id = "+ id);
-	
-		LineaDiProduzione linea = lm.getLinea( id); 
-	
-		ObjectMapper om = new ObjectMapper();
+		String codiceLinea = request.getParameter("id");
+		
 		response.setContentType("application/json");
-	
-		String jsonOutput = om.writeValueAsString(linea);
 		
-		response.getWriter().append(jsonOutput).close();
+		String snapshot = lm.getSnapshot(codiceLinea);
+		
+		response.getWriter().append(snapshot).close();
 	}
 
 }

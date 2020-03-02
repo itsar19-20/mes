@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 public class Stazione {
@@ -38,12 +39,15 @@ public class Stazione {
     @JsonIgnore
     private LineaDiProduzione linea;
 
+    @JsonInclude
     private String nome; 
     
     @Id
+    @JsonInclude
     private String codiceStazione;
     
     @OneToMany(mappedBy="stazione")
+    @JsonIgnore
     private List<StatoStazione> statiStazione;
 	
     /*
