@@ -1,11 +1,13 @@
 package business;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import business.LineaManager; 
 
@@ -100,34 +102,71 @@ public class StatoStazioniManager {
 		}
 	}*/
 	
-	//TODO: cambiare visibilità
 	public void memorizzaStatoStazione( StatoStazione stato) {
 		
 		this.entityManager.getTransaction().begin();
     	this.entityManager.persist(stato); 
     	this.entityManager.getTransaction().commit();
 	}
+	
+	public List<StatoStazione> leggiStatoStazioni( String codiceLinea) {
 		
+		StatoStazioniManager sm = StatoStazioniManager.getInstance(); 
+		List<String> codiciStazione = sm.leggiCodiciStazioni(codiceLinea); 
+		
+		
+		List<StatoStazione> result = new ArrayList<>();
+		
+		for( String codice : codiciStazione ) {
+			
+			StatoStazione stato = sm.leggiStatoStazione(codice);
+		
+			if( stato != null ) {
+				
+				result.add(stato); 
+			}
+		}
+		
+		if( result.isEmpty() ) {
+			
+			return null; 
+		}
+		
+		return result; 
+	}
 	
 	public StatoStazione leggiStatoStazione( String codiceStazione) {
 		
+		String queryString = "SELECT s FROM StatoStazione s WHERE s.stazione.codiceStazione =:id ORDER BY s.TimeStamp DESC"; 
 		
-		// creo un entity manager
-		EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
+		//JPQL
+		List<StatoStazione> result = this.entityManager.createQuery( queryString, StatoStazione.class)
+									 .setParameter( "id", codiceStazione)
+									 .setMaxResults(1)
+									 .getResultList(); 
 		
-		// JPQL
-    	List<StatoStazione> result = em.createQuery("select s from StatoStazione s where s.stazione.codiceStazione = :id ORDER BY s.TimeStamp DESC", StatoStazione.class)
-    							.setParameter("id", codiceStazione)
-    							.getResultList();
-
-    	StatoStazione _return = null; 
-    	
-    	if( ! result.isEmpty()) {
-    		
-    		_return = result.get(0); 
-    	}
-    	
-    	return _return; 
+		if( result.isEmpty() ) {
+			
+			return null; 
+		}
+		
+		return result.get(0); 
 	}
-
+	
+	public List<String> leggiCodiciStazioni( String codiceLinea){
+			
+		String queryString = "SELECT s.codiceStazione FROM Stazione s WHERE s.linea.codiceLinea =:id"; 
+		
+		//JPQL
+		List<String> result = this.entityManager.createQuery( queryString, String.class)
+									 .setParameter( "id", codiceLinea)
+									 .getResultList(); 
+		
+		if( result.isEmpty() ) {
+			
+			return null; 
+		}
+		
+		return result; 
+	}
 }

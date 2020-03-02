@@ -49,41 +49,28 @@ public class ScadaProvider extends HttpServlet {
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 			log.debug("controllers: ScadaProvider: doGET()");
-			
-			EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
+		
 			LineaManager lm = LineaManager.getInstance(); 
 			
-			List<LineaDiProduzione> linee = lm.elencoLinee(); 
-			
-			List< List< StatoStazione> > snapshot = new ArrayList<>(); 
-			
-			for( LineaDiProduzione l : linee ) {
+			String codiceLinea = request.getParameter("codiceLinea"); 
 				
-				List<StatoStazione> catena = new ArrayList(); 
-				
-				for( Stazione s : l.getStazioni() ) {
+			List<StatoStazione> catena = new ArrayList<>(); 
+			List<Stazione> elencoStazioni = lm.getAllStazioni(codiceLinea); 
 			
-					//genero un segnale random
-					SegnaleStazione segnale = randomSegnaleStazione();  
+			for( Stazione s : elencoStazioni ) {
+			
+				SegnaleStazione segnale = randomSegnaleStazione();  	
+				StatoStazione stato = new StatoStazione( s,  segnale);
 					
-					StatoStazione stato = new StatoStazione( s,  segnale);
+				catena.add(stato);
 					
-					catena.add(stato);
-				}
-				
-				snapshot.add(catena); 
 			}
 			
-			//converto lo 'snapshot' in una stringa JSON
-			
 			ObjectWriter ow = new ObjectMapper().writerWithDefaultPrettyPrinter();
-			String json = ow.writeValueAsString( snapshot);
-			
-			ResponseWriter rw = new ResponseWriter(); 
+			String json = ow.writeValueAsString( catena);
+		
 			response.setContentType("application/json");
-			
 			response.getWriter().append(json).close();
-			System.out.println(json);
 			
 		}
 
@@ -98,6 +85,8 @@ public class ScadaProvider extends HttpServlet {
 		
 		
 		private SegnaleStazione randomSegnaleStazione() {
+			
+			log.debug("controllers: ScadaProvider: randomSegnaleStazione()");
 			
 			int intero = rand.nextInt(10); 
 			

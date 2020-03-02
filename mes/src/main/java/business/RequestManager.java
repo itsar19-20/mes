@@ -18,10 +18,23 @@ public class RequestManager {
 
 	private static Logger log = LoggerFactory.getLogger(RequestManager.class);
 	
+	private static RequestManager instance;
+	
 	static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 	
+	private RequestManager() {
+		
+	}
 	
-	//TODO: da modificare in base al nuovo 
+	public static RequestManager getInstance() {
+    	
+    	if( instance == null)
+			instance = new RequestManager();
+    	
+		return instance;
+    }
+	
+	
 	public String requestGET( String endpoint) throws IOException {
 		
 		GenericUrl url = new GenericUrl( endpoint);
@@ -30,7 +43,7 @@ public class RequestManager {
         log.debug("business: NetworkManager: requestGET(): " + response.getStatusCode()); 
 
         InputStream streamIn = response.getContent();
-        String result = new String(); 
+        String result = "";  
         
         int ch;
         while ((ch = streamIn.read()) != -1) {
