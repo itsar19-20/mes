@@ -41,7 +41,7 @@ public class LoginController extends HttpServlet {
 		ResponseWriter respoWriter = new ResponseWriter(); 
 		
 		//restituisce la pagina di login
-		respoWriter.write("C:\\Users\\user\\git\\mes_master\\mes\\src\\main\\webapp\\WEB-INF\\login.html", response);
+		respoWriter.write("./src/main/webapp/WEB-INF/login.html", response);
 	}
 
 	/**
@@ -60,7 +60,6 @@ public class LoginController extends HttpServlet {
 		AuthenticationManager auth = new AuthenticationManager();
 		Utente user = auth.login(username, password);
 		
-		//request.getSession().setAttribute("user", user);
 		ObjectMapper om = new ObjectMapper();
 		response.setContentType("application/json");
 

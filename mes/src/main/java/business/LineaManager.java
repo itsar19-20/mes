@@ -4,9 +4,17 @@ import java.util.*;
 
 import javax.persistence.EntityManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import controllers.ServiceController;
 import model.LineaDiProduzione;
 import model.StatiLinea;
 import model.StatoLinea;
+import model.StatoStazione;
 import model.Stazione;
 import model.Utente;
 import utils.JPAUtil;
@@ -16,6 +24,8 @@ import utils.JPAUtil;
  */
 public class LineaManager {
 
+	
+	private static Logger log = LoggerFactory.getLogger(LineaManager.class);
 	
     private static LineaManager instance;
     
@@ -56,7 +66,12 @@ public class LineaManager {
 
     private void memorizzaStatoLinea( StatoLinea stato) {
 		
-    	this.entityManager.getTransaction().begin();
+    	boolean transactionActive = this.entityManager.getTransaction().isActive();
+    	
+    	if( !transactionActive ) {
+    	
+    		this.entityManager.getTransaction().begin();
+    	}
     	this.entityManager.persist(stato); 
     	this.entityManager.getTransaction().commit();
 	}
@@ -67,7 +82,8 @@ public class LineaManager {
     public void avvia( LineaDiProduzione linea) {
         
     	StatoLinea stato = new StatoLinea( linea, StatiLinea.avviata );
-    	//scrive lo stato corrente della linea sul database
+    	
+    	//salva nel DB
     	this.memorizzaStatoLinea( stato);  
     	
     }
@@ -114,8 +130,29 @@ public class LineaManager {
     	return _return;
     }
     
+    
     /**
-     * @param LineaDiProduzione
+     * @param String
+     * @return List<Stazione>
+     */
+    public List<Stazione> getAllStazioni( String codiceLinea) {
+		
+    	// JPQL
+    	List<Stazione> result = this.entityManager.createQuery("select s from Stazione s where s.linea.codiceLinea = :id", Stazione.class)
+    							.setParameter("id", codiceLinea)
+    							.getResultList();
+
+    	if( result.isEmpty()) {
+    		
+    		return null;  
+    	}
+    	
+    	return result;
+    }
+    
+    
+    /**
+     * @param String
      * @return Stazione
      */
     public Stazione getStazione( String codiceStazione) {
@@ -135,6 +172,31 @@ public class LineaManager {
     	return _return;
     }
     
+    
+    /**
+     * @param String
+     * @return String	//JSON
+     * @throws JsonProcessingException 
+     */
+    public String getSnapshot( String codiceLinea) throws JsonProcessingException {
+		
+    	log.debug("business: LineaManager: getSnapshot()");
+    	
+    	LineaManager lm = LineaManager.getInstance();
+		LineaDiProduzione linea = lm.getLinea( codiceLinea); 
+				
+		StatoStazioniManager sm = StatoStazioniManager.getInstance();
+		List<StatoStazione> statoStazioni = sm.leggiStatoStazioni(codiceLinea); 
+		
+		ObjectMapper om = new ObjectMapper();
+		Map< String, Object> resultObject = new HashMap<>();
+		
+		resultObject.put("linea", linea);
+		resultObject.put("stato", statoStazioni); 
+	
+		return om.writeValueAsString(resultObject); 
+    }
+    
     /**
      * @param LineaDiProduzione
      * @return
@@ -142,7 +204,8 @@ public class LineaManager {
     public void ferma( LineaDiProduzione linea) {
     	
     	StatoLinea stato = new StatoLinea( linea, StatiLinea.ferma );
-    	//scrive lo stato corrente della linea sul database
+    	
+    	//salva nel DB
     	this.memorizzaStatoLinea( stato);  
     }
     
@@ -152,7 +215,8 @@ public class LineaManager {
     public void inErrore( LineaDiProduzione linea) {
     	
     	StatoLinea stato = new StatoLinea( linea, StatiLinea.inErrore );
-    	//scrive lo stato corrente della linea sul database
+    	
+    	//salva nel DB
     	this.memorizzaStatoLinea( stato);  
     }
     
@@ -162,7 +226,8 @@ public class LineaManager {
     public void inPausa( LineaDiProduzione linea) {
     	
     	StatoLinea stato = new StatoLinea( linea, StatiLinea.inPausa );
-    	//scrive lo stato corrente della linea sul database
+    	
+    	//salva nel DB
     	this.memorizzaStatoLinea( stato);
     }
     

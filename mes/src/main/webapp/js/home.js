@@ -14,15 +14,18 @@ $(() => {
                 id: '001' 
             }
         })
-        .done( (linea) => {
+        .done( (snapshot) => {
 
-                if( linea ){
+            if( snapshot){
                         
-                    localStorage.setItem( 'linea', JSON.stringify(linea));
-                    location.href = '/login';
-                }    
-           })
-        .fail((a, b) => console.log('fail!!', a, b));
+                localStorage.setItem( 'snapshot', JSON.stringify(snapshot));
+                console.log(JSON.stringify(snapshot));
+            
+                location.href = '/login';
+            }      
+       })
+       .fail((a, b) => console.log('fail!!', a, b));
+   
     });
 
     $('#lineaDue').click(() => {
@@ -37,13 +40,15 @@ $(() => {
                 id: '002' 
             }
         })
-        .done( (linea) => {
+        .done( (snapshot) => {
 
-                if( linea ){
-                        
-                    localStorage.setItem( 'linea', JSON.stringify(linea));
+                if( snapshot){
+                            
+                    localStorage.setItem( 'snapshot', JSON.stringify(snapshot));
+                    console.log(JSON.stringify(snapshot));
+                
                     location.href = '/login';
-                }    
+                }      
            })
         .fail((a, b) => console.log('fail!!', a, b));
     });
@@ -60,11 +65,13 @@ $(() => {
                 id: '003' 
             }
         })
-        .done( (linea) => {
+        .done( (snapshot) => {
 
-                if( linea ){
+                if( snapshot){
                         
-                    localStorage.setItem( 'linea', JSON.stringify(linea));
+                    localStorage.setItem( 'snapshot', JSON.stringify(snapshot));
+                    console.log(JSON.stringify(snapshot));
+                
                     location.href = '/login';
                 }    
            })
