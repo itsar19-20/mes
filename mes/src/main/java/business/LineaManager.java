@@ -45,7 +45,7 @@ public class LineaManager {
     public static LineaManager getInstance() {
     	
     	if( instance == null)
-			instance = new LineaManager();
+    		instance = new LineaManager();
     	
 		return instance;
     }
@@ -54,26 +54,46 @@ public class LineaManager {
      */
     public List<LineaDiProduzione> elencoLinee() {
     	
-    	List<LineaDiProduzione> elenco = new ArrayList<>(); 
-    	
-    	for( LineaDiProduzione linea : this.entityManager.createNamedQuery("LineaDiProduzione.findAll", LineaDiProduzione.class).getResultList()) {
+    	try {
     		
-    		elenco.add( linea); 
-    	
+  
+	    	List<LineaDiProduzione> elenco = new ArrayList<>(); 
+	    	
+	    	for( LineaDiProduzione linea : this.entityManager.createNamedQuery("LineaDiProduzione.findAll", LineaDiProduzione.class).getResultList()) {
+	    		
+	    		elenco.add( linea); 
+	    	
+	    	}
+	    	
+	    	if( !elenco.isEmpty())
+	    		return elenco; 
+	    	else
+	    		return null; 
+	    	
+    	}catch( Exception e ) {
+    		
+    		log.debug("business: LineaManager: elencoLinee(): error");
+    		return null; 
     	}
-    	return elenco; 
     }
 
     private void memorizzaStatoLinea( StatoLinea stato) {
+    	
+    	try {
 		
-    	boolean transactionActive = this.entityManager.getTransaction().isActive();
-    	
-    	if( !transactionActive ) {
-    	
-    		this.entityManager.getTransaction().begin();
+	    	boolean transactionActive = this.entityManager.getTransaction().isActive();
+	    	
+	    	if( !transactionActive ) {
+	    	
+	    		this.entityManager.getTransaction().begin();
+	    	}
+	    	this.entityManager.persist(stato); 
+	    	this.entityManager.getTransaction().commit();
+	    	
+    	}catch( Exception e ) {
+    		
+    		log.debug("business: LineaManager: memorizzaStatoLinea(): error");
     	}
-    	this.entityManager.persist(stato); 
-    	this.entityManager.getTransaction().commit();
 	}
     
     /**
@@ -94,19 +114,27 @@ public class LineaManager {
      */
     public LineaDiProduzione getLinea( String codiceLinea ){
     	
-    	// JPQL
-    	List<LineaDiProduzione> result = this.entityManager.createQuery("select l from LineaDiProduzione l where l.codiceLinea = :id", LineaDiProduzione.class)
-    							.setParameter("id", codiceLinea)
-    							.getResultList();
-
-    	LineaDiProduzione _return = null; 
+    	try {
     	
-    	if( ! result.isEmpty()) {
+	    	// JPQL
+	    	List<LineaDiProduzione> result = this.entityManager.createQuery("select l from LineaDiProduzione l where l.codiceLinea = :id", LineaDiProduzione.class)
+	    							.setParameter("id", codiceLinea)
+	    							.getResultList();
+	
+	    	LineaDiProduzione _return = null; 
+	    	
+	    	if( ! result.isEmpty()) {
+	    		
+	    		_return = result.get(0); 
+	    	}
+	    	
+	    	return _return; 
+	    	
+    	}catch( Exception e) {
     		
-    		_return = result.get(0); 
+    		log.debug("business: LineaManager: getLinea(): error");
+    		return null; 
     	}
-    	
-    	return _return; 
     }
     
     /**
@@ -115,19 +143,27 @@ public class LineaManager {
      */
     public StatoLinea getStatoLinea( String codiceLinea) {
         
-    	// JPQL
-    	List<StatoLinea> result = this.entityManager.createQuery("select s from StatoLinea s where s.linea.codiceLinea = :id ORDER BY s.timestamp DESC", StatoLinea.class)
-    							.setParameter("id", codiceLinea)
-    							.getResultList();
-
-    	StatoLinea _return = null; 
+    	try {
     	
-    	if( ! result.isEmpty()) {
+	    	// JPQL
+	    	List<StatoLinea> result = this.entityManager.createQuery("select s from StatoLinea s where s.linea.codiceLinea = :id ORDER BY s.timestamp DESC", StatoLinea.class)
+	    							.setParameter("id", codiceLinea)
+	    							.getResultList();
+	
+	    	StatoLinea _return = null; 
+	    	
+	    	if( ! result.isEmpty()) {
+	    		
+	    		_return = result.get(0); 
+	    	}
+	    	
+	    	return _return;
+	    	
+    	}catch( Exception e) {
     		
-    		_return = result.get(0); 
+    		log.debug("business: LineaManager: getStatoLinea(): error");
+    		return null; 
     	}
-    	
-    	return _return;
     }
     
     
@@ -137,17 +173,25 @@ public class LineaManager {
      */
     public List<Stazione> getAllStazioni( String codiceLinea) {
 		
-    	// JPQL
-    	List<Stazione> result = this.entityManager.createQuery("select s from Stazione s where s.linea.codiceLinea = :id", Stazione.class)
-    							.setParameter("id", codiceLinea)
-    							.getResultList();
-
-    	if( result.isEmpty()) {
-    		
-    		return null;  
-    	}
+    	try {
     	
-    	return result;
+	    	// JPQL
+	    	List<Stazione> result = this.entityManager.createQuery("select s from Stazione s where s.linea.codiceLinea = :id", Stazione.class)
+	    							.setParameter("id", codiceLinea)
+	    							.getResultList();
+	
+	    	if( result.isEmpty()) {
+	    		
+	    		return null;  
+	    	}
+	    	
+	    	return result;
+    
+    	}catch( Exception e) {
+    		
+    		log.debug("business: LineaManager: getAllStazioni(): error");
+    		return null; 
+    	}
     }
     
     
@@ -157,19 +201,27 @@ public class LineaManager {
      */
     public Stazione getStazione( String codiceStazione) {
 		
-    	// JPQL
-    	List<Stazione> result = this.entityManager.createQuery("select s from Stazione s where s.codiceStazione = :id", Stazione.class)
-    							.setParameter("id", codiceStazione)
-    							.getResultList();
-
-    	Stazione _return = null; 
+    	try {
     	
-    	if( ! result.isEmpty()) {
+	    	// JPQL
+	    	List<Stazione> result = this.entityManager.createQuery("select s from Stazione s where s.codiceStazione = :id", Stazione.class)
+	    							.setParameter("id", codiceStazione)
+	    							.getResultList();
+	
+	    	Stazione _return = null; 
+	    	
+	    	if( ! result.isEmpty()) {
+	    		
+	    		_return = result.get(0); 
+	    	}
+	    	
+	    	return _return;
+	    
+    	}catch( Exception e) {
     		
-    		_return = result.get(0); 
+    		log.debug("business: LineaManager: getStazione(): error");
+    		return null; 
     	}
-    	
-    	return _return;
     }
     
     
@@ -178,7 +230,7 @@ public class LineaManager {
      * @return String	//JSON
      * @throws JsonProcessingException 
      */
-    public String getSnapshot( String codiceLinea) throws JsonProcessingException {
+    public String getSnapshot( String codiceLinea) {
 		
     	log.debug("business: LineaManager: getSnapshot()");
     	
@@ -194,7 +246,15 @@ public class LineaManager {
 		resultObject.put("linea", linea);
 		resultObject.put("stato", statoStazioni); 
 	
-		return om.writeValueAsString(resultObject); 
+		try {
+			
+			return om.writeValueAsString(resultObject);
+		
+		} catch (JsonProcessingException e) {
+			
+			log.debug("business: LineaManager: getSnapshot(): JsonProcessingException");
+			return null; 
+		} 
     }
     
     /**

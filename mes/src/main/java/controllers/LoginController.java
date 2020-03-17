@@ -40,8 +40,14 @@ public class LoginController extends HttpServlet {
 		
 		ResponseWriter respoWriter = new ResponseWriter(); 
 		
-		//restituisce la pagina di login
-		respoWriter.write("./src/main/webapp/WEB-INF/login.html", response);
+		try {
+			//restituisce la pagina di login
+			respoWriter.write("./src/main/webapp/WEB-INF/login.html", response);
+		
+		}catch( Exception e) {
+			
+			log.debug("controllers: LoginController: doGET(): error");
+		}
 	}
 
 	/**
@@ -54,7 +60,16 @@ public class LoginController extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		if (username == null || password == null) {
-			response.sendError(400, "username e password sono obbligatorie.");
+			
+			try {
+				
+				response.sendError(400, "username e password sono obbligatorie.");
+			
+			}catch( Exception e) {
+				
+				log.debug("controllers: LoginController: doGET(): sendError: error");
+			}
+			
 			return;
 		}
 		AuthenticationManager auth = new AuthenticationManager();
@@ -62,9 +77,16 @@ public class LoginController extends HttpServlet {
 		
 		ObjectMapper om = new ObjectMapper();
 		response.setContentType("application/json");
+		
+		try {
 
-		String jsonUser = om.writeValueAsString(user);
-		response.getWriter().append(jsonUser).close();
+			String jsonUser = om.writeValueAsString(user);
+			response.getWriter().append(jsonUser).close();
+		
+		}catch( Exception e) {
+			
+			log.debug("controllers: LoginController: doGET(): error");
+		}
 		
 	}
 

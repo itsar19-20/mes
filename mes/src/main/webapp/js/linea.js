@@ -6,24 +6,28 @@ $(() => {
     }
 
     //globals
-    var htmlRiquadroNota = '<form class="needs-validation" novalidate>    <div class="mb-3">      <label for="email">Email <span class="text-muted"></span></label>   <input type="email" class="form-control" id="email" placeholder="mario.rossi@gmail.com">       <div class="invalid-feedback">            Please enter a valid email address for shipping updates.        </div>    </div>   <div class="form-group">        <label for="inputState">Stazione:</label>        <select id="inputState" class="form-control">        <option selected>Choose...</option>        <option>...</option>        </select>    </div>  <form class="was-validated">        <div class="mb-3">        <label for="validationTextarea">Note:</label>        <textarea class="form-control" id="validationTextarea" placeholder="Required example textarea" required></textarea>        <div class="invalid-feedback">            Please enter a message in the textarea.        </div>        </div>    </form>    <hr class="mb-4">    <button class="btn btn-primary btn-lg btn-block" type="submit">Invia nota</button></form>'; 
+    var htmlRiquadroNota = '<form class="needs-validation" novalidate>    <div class="mb-3">      <label for="email">Email <span class="text-muted"></span></label>   <input type="email" class="form-control" id="email" placeholder="mario.rossi@gmail.com">       <div class="invalid-feedback">            Please enter a valid email address for shipping updates.        </div>    </div>   <div class="form-group">        <label for="inputState">Stazione:</label>        <select id="inputState" class="form-control">        <option selected>Choose...</option>        <option>...</option>        </select>    </div>  <form class="was-validated">        <div class="mb-3">        <label for="validationTextarea">Note:</label>        <textarea class="form-control" style="height:6em" id="validationTextarea" placeholder="Required example textarea" required></textarea>        <div class="invalid-feedback">            Please enter a message in the textarea.        </div>        </div>    </form>    <hr class="mb-4">    <button class="btn btn-primary btn-lg btn-block" type="submit">Invia nota</button></form>'; 
 
-    var snapshot = JSON.parse(localStorage.getItem('snapshot'));
+    var linea = JSON.parse(localStorage.getItem('linea'));
     var utente = JSON.parse(localStorage.getItem('user'));
 
-    //setup
-    $('#titolo').text( 'Linea: ' + snapshot.linea.codiceLinea);
+    var STOP_STRING_VALUE = 'true'; 
 
+    //setup
+    $('#titolo').text( 'Linea: ' + linea.codiceLinea);
     $('#nomeUtente').text( utente.nome);
+    
     $('#riquadro-sx').html( htmlRiquadroNota);
 
-    $('#nomeLineaRiquadroDestro').text( 'Linea: ' + snapshot.linea.codiceLinea);
+    $('#nomeLineaRiquadroDestro').text( 'Linea: ' + linea.codiceLinea);
     aggiornaLinea(); 
 
     //aggiornamento stazioni
-    window.setInterval( aggiornaLinea, 5000); 
+    window.setInterval( aggiornaLinea, 10000); 
 
     $('#btnAvvia').click(() => {
+
+        STOP_STRING_VALUE = 'false'; 
 
         $.ajax({
 
@@ -32,11 +36,14 @@ $(() => {
             data: {
 
                 tipo: 'avviamento',
-                codiceLinea: snapshot.linea.codiceLinea
+                codiceLinea: linea.codiceLinea,
+                stop: STOP_STRING_VALUE
             } 
         })
     });
     $('#btnStop').click(() => {
+
+        STOP_STRING_VALUE = 'true'; 
 
         $.ajax({
 
@@ -45,11 +52,14 @@ $(() => {
             data: {
 
                 tipo: 'stop', 
-                codiceLinea: snapshot.linea.codiceLinea
+                codiceLinea: linea.codiceLinea,
+                stop: STOP_STRING_VALUE
             } 
         })
     });
     $('#btnPausa').click(() => {
+
+        STOP_STRING_VALUE = 'true'; 
 
         $.ajax({
 
@@ -58,7 +68,8 @@ $(() => {
             data: {
 
                 tipo: 'pausa',
-                codiceLinea: snapshot.linea.codiceLinea
+                codiceLinea: linea.codiceLinea,
+                stop: STOP_STRING_VALUE
             } 
         })
     });
@@ -97,7 +108,8 @@ $(() => {
             data: {
 
                 tipo: 'aggiornamento', 
-                codiceLinea: snapshot.linea.codiceLinea
+                codiceLinea: linea.codiceLinea,
+                stop: STOP_STRING_VALUE
             } 
         })
         .done( (inputArray) => {

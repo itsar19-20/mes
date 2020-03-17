@@ -66,11 +66,18 @@ public class ScadaProvider extends HttpServlet {
 					
 			}
 			
-			ObjectWriter ow = new ObjectMapper().writerWithDefaultPrettyPrinter();
-			String json = ow.writeValueAsString( catena);
-		
-			response.setContentType("application/json");
-			response.getWriter().append(json).close();
+			try {
+			
+				ObjectWriter ow = new ObjectMapper().writerWithDefaultPrettyPrinter();
+				String json = ow.writeValueAsString( catena);
+			
+				response.setContentType("application/json");
+				response.getWriter().append(json).close();
+				
+			}catch( Exception e ) {
+				
+				log.debug("controllers: ScadaProvider: doGet(): error");
+			}
 			
 		}
 

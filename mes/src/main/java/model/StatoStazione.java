@@ -31,6 +31,7 @@ public class StatoStazione {
 	}
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id; 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date TimeStamp;

@@ -29,7 +29,7 @@ public class RequestManager {
 	public static RequestManager getInstance() {
     	
     	if( instance == null)
-			instance = new RequestManager();
+    		instance = new RequestManager();
     	
 		return instance;
     }
@@ -37,22 +37,30 @@ public class RequestManager {
 	
 	public String requestGET( String endpoint) throws IOException {
 		
-		GenericUrl url = new GenericUrl( endpoint);
-        HttpRequest request = HTTP_TRANSPORT.createRequestFactory().buildGetRequest(url);
-        HttpResponse response = request.execute();
-        log.debug("business: NetworkManager: requestGET(): " + response.getStatusCode()); 
-
-        InputStream streamIn = response.getContent();
-        String result = "";  
-        
-        int ch;
-        while ((ch = streamIn.read()) != -1) {
-            
-        	Character c = (char) ch;
-        	result += c.toString(); 
-        }
-        response.disconnect();
-        
-        return result; 
+		try {
+		
+			GenericUrl url = new GenericUrl( endpoint);
+	        HttpRequest request = HTTP_TRANSPORT.createRequestFactory().buildGetRequest(url);
+	        HttpResponse response = request.execute();
+	        log.debug("business: NetworkManager: requestGET(): " + response.getStatusCode()); 
+	
+	        InputStream streamIn = response.getContent();
+	        String result = "";  
+	        
+	        int ch;
+	        while ((ch = streamIn.read()) != -1) {
+	            
+	        	Character c = (char) ch;
+	        	result += c.toString(); 
+	        }
+	        response.disconnect();
+	        
+	        return result; 
+	        
+		}catch( IOException e) {
+			
+			log.debug("business: RequestManager: requestGET():IOException");
+			return null; 
+		}
 	}
 }

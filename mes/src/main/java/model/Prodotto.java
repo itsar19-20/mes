@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Prodotto {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	private String nome;
 	private String categoria;
