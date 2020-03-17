@@ -27,10 +27,7 @@ public class LineaController extends HttpServlet {
 	
 	private static Logger log = LoggerFactory.getLogger(LineaController.class);
 	
-	private static final long serialVersionUID = 1L;
-	
-	private static boolean stop = true; 
-	private static boolean pausa = false; 
+	private static final long serialVersionUID = 1L; 
     
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,8 +45,15 @@ public class LineaController extends HttpServlet {
 		
 		ResponseWriter respoWriter = new ResponseWriter(); 
 		
-		//restituisce la pagina di login
-		respoWriter.write("./src/main/webapp/WEB-INF/linea.html", response);
+		try {
+		
+			//restituisce la pagina di login
+			respoWriter.write("./src/main/webapp/WEB-INF/linea.html", response);
+		
+		} catch( Exception e) {
+			
+			log.debug("controllers: LineaController: doGET(): error");
+		}
 	}
 
 	/**
@@ -65,7 +69,10 @@ public class LineaController extends HttpServlet {
 
 		case "aggiornamento":
 			
-			aggiornamento( request, response); 
+			String stopString = request.getParameter("stop"); 
+			
+			if( stopString.equals("false"))
+				aggiornamento( request, response); 
 			break;
 			
 		case "avviamento":
@@ -88,38 +95,39 @@ public class LineaController extends HttpServlet {
 		}
 	}
 	
-	private void aggiornamento( HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void aggiornamento( HttpServletRequest request, HttpServletResponse response) {
 		
-		
-		if ( !stop && !pausa ) {
+		try {
 			
-		
 			RequestManager rm = RequestManager.getInstance();
-			
+				
 			String codiceLinea = request.getParameter("codiceLinea");
-			
-			String aggiornamento = rm.requestGET("https://localhost:8080/scada/?codiceLinea=" + codiceLinea); 
-			
+				
+			String aggiornamento = rm.requestGET("http://localhost:8080/scada?codiceLinea=" + codiceLinea); 
+				
+			//append to response
 			response.setContentType("application/json");
 			response.getWriter().append(aggiornamento).close();
-			
+				
 			//salvataggio nel DB
 			ObjectMapper om = new ObjectMapper(); 
 			List<StatoStazione> nuovoStatoStazioni = om.readValue(aggiornamento, om.getTypeFactory().constructCollectionType(List.class, StatoStazione.class));
-			
-			StatoStazioniManager sm = StatoStazioniManager.getInstance(); 
-			
-			for( StatoStazione stato : nuovoStatoStazioni ) {
 				
+			StatoStazioniManager sm = StatoStazioniManager.getInstance(); 
+				
+			for( StatoStazione stato : nuovoStatoStazioni ) {
+					
 				sm.memorizzaStatoStazione(stato);
 			}
+			
+		}catch (IOException e) {
+			
+			log.debug("controllers: LineaController: aggiornamento(): IOException");
 		}
+		
 	}
 	
 	private void avviamento( HttpServletRequest request, HttpServletResponse response) {
-		
-		stop = false; 
-		pausa = false; 
 		
 		String codiceLinea = request.getParameter("codiceLinea");
 		
@@ -133,9 +141,6 @@ public class LineaController extends HttpServlet {
 	
 	private void stop( HttpServletRequest request, HttpServletResponse response) {
 		
-		stop = true; 
-		pausa = false; 
-		
 		String codiceLinea = request.getParameter("codiceLinea");
 		
 		LineaManager lm = LineaManager.getInstance();
@@ -147,9 +152,6 @@ public class LineaController extends HttpServlet {
 	}
 
 	private void pausa( HttpServletRequest request, HttpServletResponse response) {
-		
-		stop = false; 
-		pausa = true; 
 		
 		String codiceLinea = request.getParameter("codiceLinea");
 		

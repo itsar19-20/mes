@@ -1,8 +1,10 @@
 $(() => {
     
     localStorage.clear(); 
+
+    window.setInterval( aggiorna, 3000);
     
-    $('#lineaUno').click(() => {
+    $('#linea001').click(() => {
         
         $.ajax({
         
@@ -10,25 +12,23 @@ $(() => {
             method: 'post',
             data: {
         
+                tipo: 'richiestaLinea',
                 nome: 'linea uno',
                 id: '001' 
             }
         })
-        .done( (snapshot) => {
-
-            if( snapshot){
-                        
-                localStorage.setItem( 'snapshot', JSON.stringify(snapshot));
-                console.log(JSON.stringify(snapshot));
+        .done( (linea) => {
             
+            if( linea ){
+                localStorage.setItem('linea', JSON.stringify(linea)); 
                 location.href = '/login';
-            }      
+            }
        })
        .fail((a, b) => console.log('fail!!', a, b));
    
     });
 
-    $('#lineaDue').click(() => {
+    $('#linea002').click(() => {
     
         $.ajax({
         
@@ -36,45 +36,68 @@ $(() => {
             method: 'post',
             data: {
 
+                tipo: 'richiestaLinea',
                 nome: 'linea due',
                 id: '002' 
             }
         })
-        .done( (snapshot) => {
+        .done( (linea) => {
 
-                if( snapshot){
-                            
-                    localStorage.setItem( 'snapshot', JSON.stringify(snapshot));
-                    console.log(JSON.stringify(snapshot));
-                
-                    location.href = '/login';
-                }      
-           })
+            if( linea ){
+
+                localStorage.setItem('linea', JSON.stringify(linea));
+                location.href = '/login';   
+            }
+        })
         .fail((a, b) => console.log('fail!!', a, b));
     });
 
-    $('#lineaTre').click(() => {
+    $('#linea003').click(() => {
         
-        $.ajax({
+        $.ajax({    
         
             url: '/home',
             method: 'post',
             data: {
         
+                tipo: 'richiestaLinea',
                 nome: 'linea tre',
                 id: '003' 
             }
         })
-        .done( (snapshot) => {
+        .done( (linea) => {
 
-                if( snapshot){
-                        
-                    localStorage.setItem( 'snapshot', JSON.stringify(snapshot));
-                    console.log(JSON.stringify(snapshot));
-                
-                    location.href = '/login';
-                }    
-           })
+            if( linea ){
+
+                localStorage.setItem('linea', JSON.stringify(linea));
+                location.href = '/login';   
+            }
+        })
         .fail((a, b) => console.log('fail!!', a, b));
     });
+
+    function aggiorna(){
+
+        $.ajax({
+
+            url: '/home',
+            method: 'post',
+            data: {
+
+                tipo: 'richiestaStatoLinee'
+            }
+        })
+        .done( (string) =>{
+
+            if (string) {
+
+                stato = JSON.parse(string); 
+
+                $('#stato001').text(stato[0].statoLinea);
+                $('#stato002').text(stato[1].statoLinea);
+                $('#stato003').text(stato[2].statoLinea); 
+            }
+        })
+        .fail((a, b) => console.log('fail!!', a, b));
+    }
 });

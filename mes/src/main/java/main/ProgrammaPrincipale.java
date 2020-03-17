@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import business.LineaManager;
 import business.StatoStazioniManager;
 import model.LineaDiProduzione;
@@ -15,25 +18,33 @@ import model.Utente;
 import utils.JPAUtil; 
 
 public class ProgrammaPrincipale {
+	
+	private static Logger log = LoggerFactory.getLogger(ProgrammaPrincipale.class);
 
 	public static void main(String[] args) {
 
 		// creo un entity manager
 		EntityManager em = JPAUtil.getInstance().getEntityManagerFactory().createEntityManager();
 		
-		generaLinee(em); 
+		try {
 		
-		generaUtenti(em);
+			generaLinee(em); 
+			
+			generaUtenti(em);
+			
+			StatoStazioniManager sm = StatoStazioniManager.getInstance(); 
+			LineaManager lm = LineaManager.getInstance(); 
+			
+			StatoStazione stato = new StatoStazione( lm.getStazione("01_00"), SegnaleStazione.libera); 
+			sm.memorizzaStatoStazione(stato);
+			
+			stato = sm.leggiStatoStazione("01_00");
+			System.out.println( stato.getStatoSegnale());
+			
+		}catch( Exception e){
 		
-		StatoStazioniManager sm = StatoStazioniManager.getInstance(); 
-		LineaManager lm = LineaManager.getInstance(); 
-		
-		StatoStazione stato = new StatoStazione( lm.getStazione("01_00"), SegnaleStazione.libera); 
-		sm.memorizzaStatoStazione(stato);
-		
-		stato = sm.leggiStatoStazione("01_00");
-		System.out.println( stato.getStatoSegnale());
-		
+			log.debug("main: ProgrammaPrincipale: main(): error"); 
+		}
 	}
 	
 	public static void generaUtenti( EntityManager em) {
