@@ -30,10 +30,12 @@ public class RegisterActivity extends AppCompatActivity {
     static final String TAG = "RegisterActivity";
     DatePickerDialog.OnDateSetListener dataListener;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        final DatabaseAdapter databaseAdapter = new DatabaseAdapter(this);
         nome = findViewById(R.id.nome);
         cognome = findViewById(R.id.cognome);
         data = findViewById(R.id.data);
@@ -78,7 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
 
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                 if (nome.getText().toString().isEmpty() || cognome.getText().toString().isEmpty() || data.getText().toString().isEmpty() || indirizzo.getText().toString().isEmpty() || email.getText().toString().isEmpty() || password.getText().toString().isEmpty() || numeroCarta.getText().toString().isEmpty() || cvv.getText().toString().isEmpty())
                 {
                     Toast.makeText(RegisterActivity.this, "Attenzione, compila tutti i campi prima di procedere", Toast.LENGTH_SHORT).show();
@@ -94,8 +95,28 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Attenzione, seleziona un metodo di pagamento", Toast.LENGTH_SHORT).show();
                     }
 
-                }else
-                    startActivity(intent);
+                }else {
+
+                    String nomeReg = nome.getText().toString();
+                    String cognomeReg = cognome.getText().toString();
+                    String dataReg = data.getText().toString();
+                    String indirizzoReg = indirizzo.getText().toString();
+                    String emailReg = email.getText().toString();
+                    String passwordReg = password.getText().toString();
+                    String numeroCartaReg = numeroCarta.getText().toString();
+                    String cvvReg = cvv.getText().toString();
+                    try {
+                        databaseAdapter.open();
+                        databaseAdapter.creaUtente(nomeReg, cognomeReg, dataReg, indirizzoReg, emailReg, passwordReg, numeroCartaReg, cvvReg);
+                        databaseAdapter.close();
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        Toast.makeText(RegisterActivity.this, "Registrazione effettuata con successo!", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                    } catch(Exception e){
+
+                    }
+
+                }
             }
         });
 
