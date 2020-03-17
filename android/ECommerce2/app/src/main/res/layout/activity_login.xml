@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context=".MainActivity">
+    android:background="#33b5e5"
+    tools:context=".LoginActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/accedi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#B2FDFCF8"
         android:text="Login"
         android:textColor="@color/colorAccent"
-        android:background="#B2FDFCF8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -45,26 +45,26 @@
         app:layout_constraintVertical_bias="0.645" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="            password"
+        android:hint="Password"
         android:inputType="textPassword"
         android:textColor="#130707"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"
+        app:layout_constraintTop_toBottomOf="@+id/email"
         app:layout_constraintVertical_bias="0.053"
         tools:hint="password" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="            username"
+        android:hint="Email"
         android:inputType="textPersonName"
         android:textColor="#0A0707"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -90,8 +90,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
         android:text="Non sei registrato?"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -100,12 +100,12 @@
         app:layout_constraintVertical_bias="0.74" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/registrati"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
         android:background="#B2FDFCF8"
         android:text="registrati"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -117,8 +117,8 @@
         android:id="@+id/textView2"
         android:layout_width="22dp"
         android:layout_height="19dp"
-        android:textColor="@color/colorAccent"
         android:text="o"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.531"
