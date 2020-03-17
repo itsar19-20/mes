@@ -25,20 +25,22 @@ public class Utente {
 		this.ruolo = ruolo;
 	}
 	
-	private String ruolo;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
+	private String ruolo;
 	
 	private String nome;
-	@JsonIgnore	// non serializza questo valore
+	
+	@JsonIgnore
 	private String password;
 	private boolean attivo;
-//	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-//	private List<Nota> note;
 
-
+	/*
+	 * getters and setters
+	 */
 	
 	public String getRuolo() {
 		return ruolo;

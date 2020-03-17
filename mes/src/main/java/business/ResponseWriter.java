@@ -7,28 +7,47 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ResponseWriter {
 	
-	/*
-	 * default constructor
-	 */
-	public ResponseWriter() {
-		
-	}
+	
+	private static Logger log = LoggerFactory.getLogger(ResponseWriter.class);
 	
 	/*
 	 * methods
 	 */
-	public void write( String sourceLocation, HttpServletResponse response) throws IOException {
+	public void write( String sourceLocation, HttpServletResponse response) {
 		
-		BufferedReader source = new BufferedReader( new FileReader( sourceLocation)); 
+		BufferedReader source = null;
 		
-		for( String line = source.readLine(); line != null; line = source.readLine()) {
+		try { 
 			
-			response.getWriter().append( line).flush();
-		}		
+			source = new BufferedReader( new FileReader( sourceLocation)); 
+			
+			for( String line = source.readLine(); line != null; line = source.readLine()) {
+				
+				response.getWriter().append( line).flush();
+			}		
+			
+			source.close();
 	
-		source.close(); 
+		}catch( IOException e) {
+			
+			log.debug("business: ResponseWriter: write(): IOException");
+			if( source != null ){
+				
+				try {
+					
+					source.close();
+				
+				}catch( IOException ee) {
+					
+					log.debug("business: ResponseWriter: write(): IOException: .close() error");
+				}
+			}
+		}
 	}
 	
 }

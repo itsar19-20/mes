@@ -31,6 +31,7 @@ public class StatoLinea {
 	}
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id; 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date timestamp;

@@ -12,7 +12,7 @@
 			<property name="javax.persistence.jdbc.user" value="root"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>	
 			<property name="javax.persistence.jdbc.user" value="admin"/>
-			<property name="javax.persistence.schema-generation.database.action" value="create"/>
+			<property name="javax.persistence.schema-generation.database.action" value=""/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
 			<property name="javax.persistence.jdbc.password" value=""/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/database"/>	
