@@ -3,6 +3,7 @@ package com.example.ecommerce2;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -52,9 +53,9 @@ public class DatabaseAdapter {
         return values;
     }
 
-    public long creaUtente(String nome, String cognome, String data_di_nascita, String indirizzo, String email, String password, String numero_carta, String cvv){
+    public long creaUtente(String nome, String cognome, String data_di_nascita,String indirizzo, String email, String password,String numero_carta, String cvv){
         ContentValues valoreIniziale = contentValues(nome, cognome, data_di_nascita, indirizzo, email, password, numero_carta, cvv);
-        db.insertOrThrow("utente", null, valoreIniziale);
+        return db.insertOrThrow(DatabaseAdapter.TABELLA_DATABASE,null,valoreIniziale);
     }
 
     public boolean aggiornaUtente(long id, String nome, String cognome, String data_di_nascita,String indirizzo, String email, String password,String numero_carta, String cvv){

@@ -29,13 +29,14 @@ public class RegisterActivity extends AppCompatActivity {
     TextView data;
     static final String TAG = "RegisterActivity";
     DatePickerDialog.OnDateSetListener dataListener;
+    DatabaseAdapter databaseAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        final DatabaseAdapter databaseAdapter = new DatabaseAdapter(this);
+        databaseAdapter = new DatabaseAdapter(this);
         nome = findViewById(R.id.nome);
         cognome = findViewById(R.id.cognome);
         data = findViewById(R.id.data);
