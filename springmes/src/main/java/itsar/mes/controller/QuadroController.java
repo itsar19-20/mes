@@ -17,11 +17,17 @@ import itsar.mes.model.StatoStazione;
 @Controller
 public class QuadroController {
 
-	private final WebClient webClient = WebClient.create("http://localhost:9090");
+	private final WebClient webClient; 
 	
 	private static final String NOME_LINEA_UNO = "Linea Uno"; 
 	private static final String NOME_LINEA_DUE = "Linea Due";
 	private static final String NOME_LINEA_TRE = "Linea Tre"; 
+	
+	
+	public QuadroController( WebClient webClient) {
+		
+		this.webClient = webClient; 
+	}
 	
 
 	@GetMapping("/quadro")

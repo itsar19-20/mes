@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import itsar.mes.model.StatoStazione;
 import itsar.mes.model.Utente;
@@ -26,6 +27,12 @@ public class MesApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(MesApplication.class, args);
+	}
+	
+	@Bean(name = "webClient")
+	public WebClient client() {
+		
+		return WebClient.create("http://localhost:9090"); 
 	}
 	
 	@Bean
