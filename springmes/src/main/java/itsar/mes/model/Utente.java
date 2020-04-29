@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Utente {
@@ -26,7 +27,10 @@ public class Utente {
 		 */
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
+		@JsonProperty("id")
 		private long id;	
+		
+		@JsonProperty("nome")
 		private String nome;
 		
 		@JsonIgnore

@@ -15,7 +15,13 @@ import reactor.core.publisher.Mono;
 @Controller
 public class HomeController {
 
-	private final WebClient webClient = WebClient.create("http://localhost:9090");
+	private final WebClient webClient; 
+	
+	public HomeController( WebClient webClient) {
+		
+		this.webClient = webClient; 
+	}
+	
 	
 	@GetMapping("/")
 	public String homepage( Model model) {
@@ -37,6 +43,7 @@ public class HomeController {
 						
 		return "homepage"; 
 	}
+	
 	
 	private String bgcolor( String stato) {
 		

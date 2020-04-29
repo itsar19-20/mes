@@ -31,6 +31,9 @@ public class ScadaController {
 		
 	private final StatoStazioneRepository repository; 
 	
+	/*
+	 * CONSTANTS
+	 */
 	private static final StatoLinea FERMA = new StatoLinea("ferma");
 	private static final StatoLinea AVVIATA = new StatoLinea("avviata");
 	private static final StatoLinea ERRORE = new StatoLinea("errore"); 
@@ -44,6 +47,9 @@ public class ScadaController {
 	private static final List<String> CODICE_STAZIONI_LINEA_DUE = Arrays.asList("002:001","002:002","002:003","002:004","002:005","002:006","002:007");
 	private static final List<String> CODICE_STAZIONI_LINEA_TRE = Arrays.asList("003:001","003:002","003:003","003:004","003:005","003:006","003:007","003:008","003:009");
 	
+	/*
+	 *  STATES
+	 */
 	private static List<StatoStazione> linea001 = init("001");  
 	private static List<StatoStazione> linea002 = init("002"); 
 	private static List<StatoStazione> linea003 = init("003");
@@ -54,9 +60,6 @@ public class ScadaController {
 	public ScadaController(  StatoStazioneRepository repository ) {
 		
 		this.repository = repository; 		
-		
-		//clear DB
-		repository.deleteAll();
 	}
 	
 	private static List<StatoStazione> init(String codice){

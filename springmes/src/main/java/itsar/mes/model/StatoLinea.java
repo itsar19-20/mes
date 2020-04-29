@@ -8,7 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StatoLinea {
 
+	@JsonProperty("stato")
 	private String stato;
+	
 	@JsonIgnore
 	private String bgcolor; 
 	
