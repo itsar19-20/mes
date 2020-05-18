@@ -52,6 +52,7 @@ public class MesApplication {
 	      }
 	      log.info("");
 	   
+	      statoStazioneRepository.deleteAll();
 
 	      // fetch all StatoStazione
 	      log.info("StatoStazione found with findAll():");

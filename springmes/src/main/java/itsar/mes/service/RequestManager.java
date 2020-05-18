@@ -17,6 +17,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class RequestManager {
 
+	/*
 	private static Logger log = LoggerFactory.getLogger(RequestManager.class);
 		
 	private final WebClient webClient;
@@ -45,5 +46,5 @@ public class RequestManager {
 	public void lineaTre() {
 		
 		this.webClient.post().uri("/aggiorna?codice=003").exchange().block(); 
-	}
+	}*/
 }

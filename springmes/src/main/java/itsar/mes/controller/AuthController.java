@@ -15,6 +15,7 @@ public class AuthController {
 	
 	private final UtenteRepository repository;
 
+	@Autowired
 	public AuthController( UtenteRepository repository) {
 		this.repository = repository; 
 	}

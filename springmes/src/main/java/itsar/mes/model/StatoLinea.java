@@ -40,4 +40,10 @@ public class StatoLinea {
 	public void setBgcolor(String bgcolor) {
 		this.bgcolor = bgcolor;
 	}
+
+
+	public void setStato(String stato) {
+		this.stato = stato;
+	}
+
 }

@@ -4,6 +4,10 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,6 +26,7 @@ public class StatoStazione {
 	@JsonProperty("id")
 	private long id; 
 	
+	@CreationTimestamp
 	@JsonProperty("timestamp")
 	private Date timestamp;
 	
@@ -51,12 +56,6 @@ public class StatoStazione {
 		this.statoSegnale = statoSegnale;
 		this.nomeStazione = nomeStazione;
 		this.codice = codice;
-		
-		if( timestamp == null ) {
-			this.timestamp = new java.util.Date(); 
-		}else {
-			this.timestamp = timestamp;
-		}
 	}
 	
 	/*
