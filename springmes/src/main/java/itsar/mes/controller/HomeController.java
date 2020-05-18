@@ -26,7 +26,7 @@ public class HomeController {
 	@GetMapping("/")
 	public String homepage( Model model) {
 		
-		List<StatoLinea> stati = this.webClient.get().uri("/statolinee")
+		/*List<StatoLinea> stati = this.webClient.get().uri("/linea/")
 														.accept(MediaType.APPLICATION_JSON)
 									           			.retrieve()
 									           			.bodyToFlux(StatoLinea.class)
@@ -39,7 +39,7 @@ public class HomeController {
 			stati.get(i).setBgcolor(color);			
 		}
 		
-		model.addAttribute("stati", stati);
+		model.addAttribute("stati", stati);*/
 						
 		return "homepage"; 
 	}
